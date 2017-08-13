@@ -1,0 +1,298 @@
+#+BEGIN_COMMENT
+Basic info on unix (very incomplete)
+#+END_COMMENT
+
+* Unix Tutorial
+
+In this section, we list and describe a few basic unix commands for the
+terminal.  Some commands have flags (options) that are indicated with a dash
+followed by one or more letters.  Environment variables are variables
+defined within a Terminal setting.  These variables are start with a "$" and
+usually upper-case.
+
+Two important environment variables are $HOME and $PATH.  $HOME defines your
+"home" directory.  On MacOS, this is usually something like ~/Users/elwong~;
+on Linux systems, it's usually like ~/usr/people/elwong~ or ~/home/elwong~.
+
+The $PATH variables defines the path along which the system searches for
+files.  It can be customized inside your bashrc file (see [[recommendations]]
+and [[bashrc][bashrc file]]).
+
+In the following sections, the symbol >> represents the prompt (where you
+type in commands, e.g., in the Terminal app on a Mac).
+Anything in brackets < > should be replaced with an appropriate value.
+
+For more information on a particular command and its flags, type
+#+BEGIN_SRC
+>> man <commandName>
+#+END_SRC
+For example,
+#+BEGIN_EXAMPLE
+>> man ls
+#+END_EXAMPLE
+
+
+** Basic commands
+*** Navigating in the Terminal
+When you first open a Terminal window, you should be in your $HOME
+directory.  You can use the command ~pwd~ to verify or display your $HOME
+directory location.
+
+- Show current location:
+  #+BEGIN_SRC
+  >> pwd
+  #+END_SRC
+  ~pwd~ means "print working directory".
+- To change directories:
+  #+BEGIN_SRC
+  >> cd <directory>
+  #+END_SRC
+- Go to the $HOME directory:
+  #+BEGIN_SRC
+  >> cd
+  >> cd ~
+  >> cd $HOME
+  >> cd /Users/<userName>            (on MacOS)
+  #+END_SRC
+
+*** Copying, moving, or modifying files and directories
+- List directory contents
+  #+BEGIN_SRC
+  >> ls             (lists files in current directory)
+  >> ls -l          (show list in column format)
+  >> ls -a          (include private files in listings)
+  >> ls -al         (include private files and show in column format)
+  >> ls -l ~/myDir  (list files in "myDir")
+  #+END_SRC
+  There are many more options for ~ls~.  Use ~man ls~ to read all about
+  them.
+- Remove a file/directory:
+  #+BEGIN_SRC
+  >> rm <fileName>
+  >> rm -r <dirName>
+  #+END_SRC
+  Be very careful with the remove command because there's no "undo" for it.
+
+- The ~mv~ (move) command can be used to rename or move a file or directory,
+  or move the contents of a directory.
+  The general usage for this command is
+  #+BEGIN_SRC
+  >> mv <source>  <destination>
+  #+END_SRC
+  For example, to rename a file or directory:
+  #+BEGIN_SRC
+  >> mv <fileName>  <newFileName>               (moves a file)
+  >> mv <directoryName>  <newDirectoryName>     (moves a directory)
+  >> mv <directoryName>/  <newDirectoryName>    (moves contents of the directory)
+  #+END_SRC
+  You can specify a path in the <destination> if you want to move to a
+  different location.
+  For example, to move "mydata.txt" to my home directory and keep its name:
+  #+BEGIN_SRC
+  >> mv mydata.txt ~/
+  #+END_SRC
+  To move *and* rename the file to "mynewdata.txt":
+  #+BEGIN_SRC
+  >> mv mydata.txt ~/mynewdata.txt
+  #+END_SRC
+- The ~cp~ (copy) command is similar to the ~mv~ command.  It can be used to
+  copy files, directories, or the contents of a directory.
+  #+BEGIN_SRC
+  >> cp <fileName>  <newFileName>                  (copies a file)
+  >> cp -r <directoryName>  <newDirectoryName>     (copies a directory)
+  >> cp <directory>/  <newDir>                     (copies contents of directory)
+  #+END_SRC
+  For example, to copy the file "mydata.txt" to a new directory "work" in my
+  $HOME directory:
+  #+BEGIN_SRC
+  >> cp mydata.txt ~/work/
+  #+END_SRC
+  To also rename the file to "mynewdata.txt",
+  #+BEGIN_SRC
+  >> cp mydata.txt ~/work/mynewdata.txt
+  #+END_SRC
+  To copy the directory "myDir" to another location:
+  #+BEGIN_SRC
+  >> cp -r myDir  ~/mystuff/
+  #+END_SRC
+  To copy the contents of directory "myDir" to another location:
+  #+BEGIN_SRC
+  >> cp -r myDir/  ~/mystuff/
+  #+END_SRC
+  This copies the files *inside* "myDir" into the "mystuff" directory.
+- Creating a new directory:
+  #+BEGIN_SRC
+  >> mkdir <newDirName>
+  #+END_SRC
+
+** File permissions<<file permissions>>
+Each file or directory has permissions that determine who can read or edit
+the file.  Permissions are broken up into 3 categories:
+- Owner permissions
+- Group permissions
+- Other permissions
+
+You can use ~ls -l~ to display the permissions for files in a directory.
+The output should look like:
+#+BEGIN_SRC
+-rw-r--r--    1 elwong  staff     881 Jul  7 13:29 myFile
+drwxr-xr-x    6 elwong  staff     204 Jul  7 13:44 myDir
+#+END_SRC
+The 10 characters in the first column define the permissions.  The letters
+determine the specific permission:  read (r), write (w), execute (x).
+- Characters 2-4  define the owner's permissions
+-            5-7  define the group's permissions
+-            8-10 define other's permissions
+
+_For files_, *read* grants the ability to read (i.e., view) the contents of
+the file.  *write* permission grants the ability to modify the contents of
+the file, and *execute* lets users can run a file as a program.
+
+_For directories_, *read* lets the user look at the files inside a
+directory. *write* lets the user add or delete files from the directory, and
+*execute*  lets the user go into a directory.
+
+The third column lists the owner of the file, and the fourth column lists
+the group.
+
+Generally speaking, the default permissions for a file are rw-r--r-- and for
+a directory rwxr-xr-x.
+
+*** Changing permissions
+The command to change the permissions of a file or directory is ~chmod~.
+You can add, delete, or set the permissions with ~chmod~.
+
+| Symbol | Description                 |
+|--------+-----------------------------|
+| +      | Add permissions             |
+| -      | Delete permissions          |
+| =      | Sets designated permissions |
+For example,
+#+BEGIN_SRC
+>> ls -l myFile
+-rw-r--r--  1 elwong  staff  0 Aug 13 14:36 myFile
+>> chmod o+wx myFile
+>> ls -l myFile
+-rw-r--rwx  1 elwong  staff  0 Aug 13 14:36 myFile
+>> chmod u-w myFile
+>> ls -l myFile
+-r--r--rwx  1 elwong  staff  0 Aug 13 14:36 myFile
+>> chmod g=rw myFile
+>> ls -l myFile
+-r--rw-rwx  1 elwong  staff  0 Aug 13 14:36 myFile
+#+END_SRC
+
+*** Changing ownership
+The commands to change the owner or group of a file or directory are ~chown~
+(change owner) and ~chgrp~ (change group), respectively.
+#+BEGIN_SRC
+>> chown <user>  <file/dir>
+>> chgrp <group> <file/dir>
+#+END_SRC
+
+** Environment variables
+- List all environment variables:
+  #+BEGIN_SRC
+  >> env
+  #+END_SRC
+- Display a particular variable:
+  #+BEGIN_SRC
+  >> echo $<varName>
+  >> echo $HOME
+  #+END_SRC
+- Setting a environment variable:
+  #+BEGIN_SRC
+  >> export <varName>=<value>
+  >> export CUTEST=~/cutest
+  #+END_SRC
+
+** Other commands and tips
+- Special Terminal symbols:
+  |--------+----------------------------------------|
+  | Symbol | Description                            |
+  |--------+----------------------------------------|
+  | ~      | Your HOME directory                    |
+  | -      | The last directory you were in         |
+  | /      | Top directory of your computer         |
+  | ..     | One directory up from current location |
+  | .      | Current directory                      |
+  | *      | Wildcard symbol                        |
+
+  You can use these symbols in any of the command described.  For example,
+  to move a file "myfile.txt" in my HOME directory to my current location:
+  #+BEGIN_SRC
+  >> mv ~/myfile.txt  .
+  #+END_SRC
+  Or move "up" a directory:
+  #+BEGIN_SRC
+  >> cd ..
+  #+END_SRC
+
+- Clear the terminal:
+  #+BEGIN_SRC
+  >> clear
+  #+END_SRC
+- Display file contents:
+  #+BEGIN_SRC
+  >> more <fileName>
+  >> less <fileName>
+  #+END_SRC
+- Display your previous commands:
+  #+BEGIN_SRC
+  >> history       (all commands)
+  >> history 10    (last 10 commands)
+  #+END_SRC
+- To search your old commands:
+  Hit <ctrl>-r (hold CONTROL and press "r"), then start typing the command
+  you're looking for.  Your most recent command that matches what you type
+  will show up.  To quit this feature, hit <ctrl>-g
+- To "kill" a command: Hit <ctrl>-c
+- <<symbolic links>>Create a symbolic link:
+  #+BEGIN_SRC
+  ln -s <target> <destination>
+  #+END_SRC
+  For example, to create a symbolic link to the macports-installed compiler,
+  #+BEGIN_SRC
+  >> ln -s /opt/local/bin/gfortran-mp-4.3  ~/bin
+  >> ln -s /opt/local/bin/gfortran-mp-4.3  ~/bin/gfortran-4.3
+  #+END_SRC
+  The first command will create a link with the same name as the target
+  (e.g, gfortran-mp-4.3) in the directory "bin" in your HOME directory.  The
+  second command will create the link but name it "gfortran-4.3".
+
+* Bashrc file <<bashrc>>
+** Aliases
+In your .bashrc, you can create aliases to commands that you use a lot.
+
+For examples, instead of typing ~clear~ everytime, you can alias 'c' to the
+command ~clear~ with the following
+#+BEGIN_SRC
+alias c='clear'
+#+END_SRC
+Another example is to alias ~ls -l~ to 'l'
+#+BEGIN_SRC
+alias l='ls -l'
+#+END_SRC
+You can also create an alias to go to a particular directory
+#+BEGIN_SRC
+alias sn7='cd ~/snopt7'
+#+END_SRC
+When you type ~sn7~ at the command line, this will execute ~cd ~/snopt7~ and
+take you to the directory "snopt7" in your HOME directory.
+
+** PATH variable<<recommendations>>
+The $PATH variable is probably one of the more important variables that
+needs to be set correctly to make everything work.  It defines the path
+along which the system searches for files.  The order in which locations are
+specified in PATH is important because the system will always use the *first*
+match it finds.
+
+It is recommended that you create a ~bin~ directory in your HOME directory
+(~mkdir ~/bin~).  This directory should be placed at the beginning of your
+PATH variable so that anything in ~/bin is found first.
+
+To do this you should have the following lines in your ~.bashrc~ file:
+#+BEGIN_SRC
+PATH=${HOME}/bin:${PATH}
+export PATH
+#+END_SRC

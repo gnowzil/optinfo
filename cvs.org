@@ -1,0 +1,76 @@
+#+BEGIN_COMMENT
+Information on CVS
+#+END_COMMENT
+
+
+* CVS
+** Environment setup
+Add the following lines to your .bashrc file:
+#+BEGIN_SRC
+CVSUMASK=002
+CVS_RSH=ssh
+CVSROOT=:ext:yourLoginName@ccom-portal.ucsd.edu:/usr/people/cvs/cvsroot
+export CVSUMASK CVS_RSH CVSROOT
+#+END_SRC
+
+** Common commands
+- Create a new repository called 'myProject':
+  #+BEGIN_SRC
+  >> cvs import -m "" myProject myProject start
+  (A message can be added within the quotes)
+  #+END_SRC
+- Check out a repository:
+  #+BEGIN_SRC
+  >> cvs co <repository name>
+  #+END_SRC
+- Check out a previous version by date:
+  #+BEGIN_SRC
+  >> cvs co -D 2010/4/31 <repository name>
+  >> cvs co -D "3/31/13 23:45:00 PST" <repository name>
+  #+END_SRC
+- To update your local copy of a repository:
+  #+BEGIN_SRC
+  >> cvs update -dP
+  #+END_SRC
+  (The P removes any empty directories)
+- To commit changes to the repository:
+  #+BEGIN_SRC
+  >> cvs commit -m ""
+  #+END_SRC
+  (Again, a message can be added within the quotes)
+- To diff your local copy against the repository:
+  #+BEGIN_SRC
+  >> cvs diff -D now <fileName>
+  #+END_SRC
+- To check status of files in a repository (dry-run):
+  #+BEGIN_SRC
+  >> cvs -nq update
+  #+END_SRC
+  | Symbol | Meaning                                                            |
+  |--------+--------------------------------------------------------------------|
+  | ?      | the file is not part of the repository                             |
+  | A      | file has been added, but not committed                             |
+  | U      | file is in the repository, but your local copy needs to be udpated |
+  | P      | the local copy needs to be updated (patched)                       |
+  | M      | local file has been modified                                       |
+  | C      | a conflict exists between your local file and the repository       |
+- To see the log of a particular file:
+  #+BEGIN_SRC
+  >> cvs log <fileName>
+  #+END_SRC
+- To tag a version:
+  #+BEGIN_SRC
+  >> cvs tag <tagName>
+  #+END_SRC
+- Review all tags:
+  #+BEGIN_SRC
+  >> cvs status -v
+  #+END_SRC
+- To check out version with a tag name:
+  #+BEGIN_SRC
+  >> cvs co -r <tagName> <repository name>
+  #+END_SRC
+- To move a tag to a different version of a file:
+  #+BEGIN_SRC
+  >> cvs tag -r <version#>  -F <tagname> <filename>
+  #+END_SRC

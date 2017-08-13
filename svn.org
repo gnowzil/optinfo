@@ -1,0 +1,147 @@
+#+BEGIN_COMMENT
+Information on SVN
+#+END_COMMENT
+
+* SVN Commands
+The commands and information here are specific to our (UCSD/maximal) setup.
+
+There is a user "svn" on maximal.  Our repositories live in the home
+directory of this user.
+
+In .bashrc, export the variable SVNROOT:
+#+BEGIN_SRC
+export SVNROOT=svn+ssh://maximal.ucsd.edu/usr/people/svn
+#+END_SRC
+
+** Admin commands
+- Add user to "svn" group on maximal
+  #+BEGIN_SRC
+  >> usermod -a -G svn <username>
+  #+END_SRC
+
+- To create a repository, login to maximal as 'svn' and in the top home
+  directory run:
+  #+BEGIN_SRC
+  >> svnadmin create <rep name>
+  #+END_SRC
+
+- To backup/load a repository, login to maximal as 'svn' and in the top home
+  directory run:
+  #+BEGIN_SRC
+  >> svnadmin dump <rep name> > tmp.svn
+  >> svnadmin load <rep name> < tmp.svn
+  #+END_SRC
+
+** General commands
+- Checkout a repository
+  #+BEGIN_SRC
+  >> svn checkout $SVNROOT/<rep name> ./myRepo
+  >> svn co $SVNROOT/<rep name> ./myRepo
+  >> svn co -r <revision #> $SVNROOT/<rep name> ./myRepo
+  #+END_SRC
+
+- Add files/directories to repository
+  #+BEGIN_SRC
+  >> svn add <filename>
+  #+END_SRC
+
+- Update repository
+  #+BEGIN_SRC
+  >> svn update
+  #+END_SRC
+
+- Commit changes (same as CVS)
+  #+BEGIN_SRC
+  >> svn commit -m "blah blah"
+  #+END_SRC
+
+- Undo an add, before a commit
+  #+BEGIN_SRC
+  >> svn revert <filename>
+  #+END_SRC
+
+- Move or rename file or directory
+  #+BEGIN_SRC
+  >> svn move <old_file> <new_file>
+  #+END_SRC
+
+- Delete a file from the repository
+  #+BEGIN_SRC
+  >> svn delete <filename>
+  #+END_SRC
+
+- Import files into repository
+  #+BEGIN_SRC
+  >> svn import <source> $SVNROOT/<rep name> -m "some message"
+  #+END_SRC
+
+- Ignore files in directory of a repository
+  In the directory you want to ignore files in, create a file .svnignore
+  with the files to ignore on each line (like .cvsignore).  Then run
+  following command
+  #+BEGIN_SRC
+  >> svn propset svn:ignore -R -F .svnignore .
+  #+END_SRC
+
+- List all repositories
+  #+BEGIN_SRC
+  >> svn ls $SVNROOT/
+  #+END_SRC
+
+- List files/directories inside a repository
+  #+BEGIN_SRC
+  >> svn ls $SVNROOT/<rep name>
+  >> svn ls $SVNROOT/<rep name>/trunk
+  >> svn ls $SVNROOT/<rep name>/branches
+  >> svn ls $SVNROOT/<rep name>/tags
+  #+END_SRC
+
+
+** Software-repository-specific commands
+Our software repositories are structured as follows.
+- <software_name>/
+  - branches/     where all branches of this software will live
+  - tags/         where all tags of this software will live
+  - trunk/        this is the "distributable" branch of our software
+                   (i.e., always ready to be given out)
+
+- To checkout trunk, branch or tag
+  #+BEGIN_SRC
+  >> svn co $SVNROOT/<software_name>/trunk ./mySoftware
+  >> svn co $SVNROOT/<software_name>/branches/<branch_name>  ./myBranch
+  >> svn co $SVNROOT/<software_name>/tags/<tag_name>  ./myTag
+  #+END_SRC
+
+- Creating a branch (or tag) from trunk
+  (Note these commands can be run from any location)
+  #+BEGIN_SRC
+  >> svn copy $SVNROOT/<software_name>/trunk $SVNROOT/<software_name>/branches/<branch_name> -m "Creating branch <branch_name>"
+  >> svn copy $SVNROOT/<software_name>/trunk $SVNROOT/<software_name>/tags/<tag_name>  -m "Tagging <tag>"
+  #+END_SRC
+
+- Create a branch from another branch or tag
+  (Similar to above but change the "source" to a branch or tag)
+  #+BEGIN_SRC
+  >> svn copy $SVNROOT/<software_name>/branches/<thisBranch>
+     $SVNROOT/<software_name>/branches/<thatBranch> -m "Creating branch <> from branch <>"
+  #+END_SRC
+
+- Delete a branch or tag
+  #+BEGIN_SRC
+  >> svn delete $SVNROOT/<software_name>/branches/<branch_name>
+  >> svn delete $SVNROOT/<software_name>/tags/<tag>
+  #+END_SRC
+
+- To grab change from trunk and merge into your branch
+  Run the following inside your checked-out branch
+  #+BEGIN_SRC
+  >> svn merge $SVNROOT/<software_name>/trunk
+  >> svn commit -m "Merged trunk changes into branch <branch_name>"
+  #+END_SRC
+
+- To merge a branch into trunk
+  Run this in your local checked-out trunk:
+  #+BEGIN_SRC
+  >> svn merge --reintegrate $SVNROOT/<software_name>/branches/<branch_name>
+  >> svn commit -m "Merged branch <branch_name> into trunk"
+  #+END_SRC
