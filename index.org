@@ -8,8 +8,8 @@
 #+HTML_HEAD: <link href='//fonts.googleapis.com/css?family=Open+Sans|Lato' rel='stylesheet'/>
 #+HTML_HEAD: <link href="css/style.css" rel="stylesheet" type="text/css" />
 
-#+LINK: gh        https://github.com/
 #+LINK: ccom-opt  https://ccom.ucsd.edu/~optimizers
+#+LINK: git-optinfo  https://github.com/gnowzil/optinfo
 
 #+HTML: <div class="outline" id="meta">
 | *Author* | {{{author}}} ({{{email}}})    |
@@ -23,6 +23,8 @@ This is an attempt to gather all of the computing information we have
 amassed over the years that will be helpful to members of our optimization
 group.  It is by no means complete, but we hope to keep it as up-to-date as
 possible.
+
+These files are hosted on [[git-optinfo]].
 
 
 #+INCLUDE: "./unix.org" :minlevel 1
