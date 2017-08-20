@@ -31,16 +31,16 @@ For the SIF problem files:
 
 ** Installing CUTEst
 
-Before installing the package, you will need to set a few environment
+_Before installing the package_, you will need to set a few environment
 variables to make sure everything runs smoothly.
 
-| Variable   | Value                               | Example                                    |
-|------------+-------------------------------------+--------------------------------------------|
-| $ARCHDEFS  | Location of the archdefs directory  |                                            |
-| $SIFDECODE | Location of the sifdecode directory |                                            |
-| $CUTEST    | Location of the cutest directory    |                                            |
-| $MYMATLAB  | Location of Matlab                  | MYMATLAB=/Applications/MATLAB_R2015a.app/  |
-| $MASTSIF   | Location of the SIF files directory |                                            |
+| Variable   | Description                         | Example                                   |
+|------------+-------------------------------------+-------------------------------------------|
+| $ARCHDEFS  | Location of the archdefs directory  |                                           |
+| $SIFDECODE | Location of the sifdecode directory |                                           |
+| $CUTEST    | Location of the cutest directory    |                                           |
+| $MYMATLAB  | Location of Matlab                  | MYMATLAB=/Applications/MATLAB_R2015a.app/ |
+| $MASTSIF   | Location of the SIF files directory |                                           |
 
 You also need to make sure you have Fortran (gfortran) and C (gcc) compilers
 installed on your machine.
@@ -59,6 +59,17 @@ install script:
 #+END_SRC
 The script will ask you several questions about your system.  If you are not
 using CUTEst with Matlab, choose the "gfortran" and "gcc" options.
+
+_After installing CUTEst_, you will need to set two more environment
+variables.
+
+| Variable      | Description                                                |
+|---------------+------------------------------------------------------------|
+| $MYARCH       | The architecture that CUTEst has been installed for        |
+| $MYMATLABARCH | The architecture that CUTEst+Matlab has been installed for |
+These variables consist of 3 components that depend on the system you're
+on.  On MacOS with gfortran, it should be ~mac64.osx.gfo~.  On Linux,
+~pc64.lnx.gfo~.
 
 ** Troubleshooting
 - Errors encountered when compiling a Matlab mex-file or when installing CUTEst with Matlab:
