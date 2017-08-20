@@ -9,9 +9,10 @@ body { color: #111; font-size: 15px;
     position: fixed;
     padding: .75em;
     top: 0; left: 0;
-    width: 250px; height: 100%;
+    width: 250px; height: 99%;
     color: #111;
     background-color: #222;
+    overflow: scroll;
 }
 
 ul { margin: 0em; padding-left: 2em; list-style: circle; }
@@ -19,6 +20,7 @@ ul li { padding: .15em .25em .15em .25em; }
 
 #table-of-contents ul {
     list-style: none; padding: 0em; margin: 0em;
+    padding-bottom: .5em
 }
 #table-of-contents ul ul {
     padding-left: .75em;
@@ -33,7 +35,7 @@ h2 { font-size: 1.5em; margin-bottom: .5em;
 h3 { color: #444; font-size: 1.2em; margin: 0em; margin-bottom: .2em; }
 h4 { color: #444; }
 
-a { color: #336699; text-decoration: none; }
+a { color: #5fbdbd; text-decoration: none; }
 a:hover { text-decoration: underline; }
 
 table { border-collapse: collapse; }

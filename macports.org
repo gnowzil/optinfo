@@ -1,0 +1,109 @@
+#+BEGIN_COMMENT
+Information on Macports
+#+END_COMMENT
+
+#+OPTIONS: ^:nil
+
+* MacPorts
+[[http://macports.org][MacPorts]] is a package management system for MacOS.  It is a relatively easy
+process to install required software packages on your system.  All packages
+or /ports/ are installed in the directory ~/opt/local/bin~.  Remember to
+add this directory to the beginning of your $PATH definition in your
+=bashrc= file.
+
+An alternative to Macports is [[http://brew.sh][Homebrew]].
+
+*** Install and update ports
+- Update Macports and its port definitions.  This should be be done on a
+  regular basis to keep the Macports system up-to-date.
+  #+BEGIN_SRC
+  sudo port -v selfupdate
+  #+END_SRC
+- Installing a port
+  #+BEGIN_SRC
+  sudo port install <package> <+|-><dependents>
+  #+END_SRC
+- Upgrade a port
+  #+BEGIN_SRC
+  sudo port upgrade <package>
+  #+END_SRC
+- Upgrade all outdated ports
+  #+BEGIN_SRC
+  sudo port -u upgrade outdated   % -u to uninstall older version
+  #+END_SRC
+*** Information on a specific port
+#+BEGIN_SRC
+port info <package>
+#+END_SRC
+- List ports that depend on a given package
+  #+BEGIN_SRC
+  port dependents <package>
+  #+END_SRC
+- List the dependencies of a given package
+  #+BEGIN_SRC
+  port deps <package>
+  #+END_SRC
+- Variants of a port
+  #+BEGIN_SRC
+  port variants <package>
+  #+END_SRC
+*** Listing installed port information
+- Listing installed ports
+  #+BEGIN_SRC
+  port installed
+  #+END_SRC
+- Listing inactive installed ports
+  #+BEGIN_SRC
+  port installed inactive
+  #+END_SRC
+- Listing outdated ports
+  #+BEGIN_SRC
+  port outdated
+  #+END_SRC
+- Listing "leaves" (ports installed for other packages but aren't needed afterwards)
+  #+BEGIN_SRC
+  port echo leaves
+  #+END_SRC
+*** Uninstall packages
+- Uninstall a package
+  #+BEGIN_SRC
+  sudo port uninstall <package>
+  #+END_SRC
+- Uninstall a specific version of a package
+  #+BEGIN_SRC
+  sudo port uninstall <package@version>
+  #+END_SRC
+- Uninstall inactive ports
+  #+BEGIN_SRC
+  sudo port uninstall inactive
+  #+END_SRC
+- Uninstall leaves
+  #+BEGIN_SRC
+  sudo port uninstall leaves
+  #+END_SRC
+
+** List of ports
+*** Fortran, C, C++ compilers
+- ~gcc43~
+- ~gcc5~
+- ~gcc6~
+*** Development tools
+- ~valgrind~ (or ~valgrind-devel~)
+*** Latex
+Generally, we recommend installing the full version of texlive via Macports:
+~texlive +full~.  There is also a ~+medium~ variant; however, this variant
+does not include some of the science-related Latex packages, which will need
+to be installed manually.  To install TexLive /without/ documentation, add
+the ~-doc~ variant, e.g., ~texlive +medium -doc~.
+*** Python
+- ~python3~
+- ~python27~
+- ~py-numpy~
+- ~py-scipy~
+*** Other ports
+- ~emacs +x11 +gtk~
+- ~auctex~
+- ~subversion~
+- ~tkdiff~
+- ~ipe~ and ~ipe-tools~
+- ~iTerm2~

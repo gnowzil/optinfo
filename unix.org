@@ -125,7 +125,7 @@ directory location.
   >> mkdir <newDirName>
   #+END_SRC
 
-** File permissions<<file permissions>>
+** <<file permissions>>File permissions
 Each file or directory has permissions that determine who can read or edit
 the file.  Permissions are broken up into 3 categories:
 - Owner permissions
@@ -260,7 +260,7 @@ The commands to change the owner or group of a file or directory are ~chown~
   (e.g, gfortran-mp-4.3) in the directory "bin" in your HOME directory.  The
   second command will create the link but name it "gfortran-4.3".
 
-* Bashrc file <<bashrc>>
+* <<bashrc>>Bashrc file
 ** Aliases
 In your .bashrc, you can create aliases to commands that you use a lot.
 
@@ -280,7 +280,7 @@ alias sn7='cd ~/snopt7'
 When you type ~sn7~ at the command line, this will execute ~cd ~/snopt7~ and
 take you to the directory "snopt7" in your HOME directory.
 
-** PATH variable<<recommendations>>
+** <<recommendations>>PATH variable
 The $PATH variable is probably one of the more important variables that
 needs to be set correctly to make everything work.  It defines the path
 along which the system searches for files.  The order in which locations are
