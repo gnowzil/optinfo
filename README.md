@@ -1,2 +1,0 @@
-# optinfo
-Information on ... everything

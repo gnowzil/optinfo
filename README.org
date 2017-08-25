@@ -1,0 +1,15 @@
+#+TITLE: optinfo
+
+=optinfo= is an attempt to gather all of the computing information we have
+amassed over the years that will be helpful to members of our optimization
+group at UC San Diego. It is by no means complete, but we hope to keep it as
+up-to-date as possible.
+
+
+- unix.org :: Basic descriptions of some of the common unix commands.  When
+              in doubt, use google (or the ~man~ command) for more help.
+- macports.org :: Macports commands and a list of ports you may find useful.
+- cutest.org :: Information on how to download, install, configure CUTEst.
+- cvs.org :: Info on using cvs, a version control system.
+- svn.org :: Info on using subversion, a version control system.
+
