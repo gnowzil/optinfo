@@ -1,0 +1,37 @@
+#+BEGIN_COMMENT
+Matlab/Fortran Information
+#+END_COMMENT
+
+#+OPTIONS: ^:nil
+
+* Matlab/Mex Information
+Information on compiling Matlab executable (mex) files with a Fortran library.
+
+** Matlab Debugging
+- To run valgrind in Matlab:
+  #+BEGIN_SRC
+  matlab -nojvm -nosplash -D"valgrind --error-limit=no --tool=memcheck -v --log-file=valgrind.log"
+  #+END_SRC
+
+** Troubleshooting
+- Errors encountered when compiling a Matlab mex-file:
+  - Error: =No supported compiler or SDK was found=
+  - Error: =-arch not recognized=
+
+  For both of these, you need to edit a few xml files in Matlab.  They are
+  located in =<matlab>/bin/<sys>/mexopts/=, where <matlab> is the the path
+  to the version of Matlab you are using, and <sys> depends on what system
+  you're on.  For example, on MacOS with 2015aSP1, the files are in
+  =/Applications/MATLAB_R2015aSP1.app/bin/maci64/mexopts/=.
+
+  In this file, you will see xml files for gfortran, clang, and clang++.
+  You will need to edit these files and may need to change the permission in
+  order to give you /write/ access (see [[file permissions]]).
+
+  _For the first error_, open up these files and search for lines with
+  MacOS10.10.sdk.  You will need to add lines for MacOSX10.12.sdk (for
+  Xcode8) wherever you see lines with MacOS10.10.sdk.  You should add 4
+  lines in total.
+
+  _For the second error_, search the xml files for =-arch x86_64= and remove
+  them from all of the xml files.
