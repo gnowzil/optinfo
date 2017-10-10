@@ -4,14 +4,14 @@ Information on installing, troubleshooting, using CUTEst
 
 #+OPTIONS: ^:nil
 
-* CUTEst
 
+* CUTEst
 CUTEst (Constrained and Unconstrained Testing Environment with Safe Threads)
 is a testing environment for numerical optimization.  The package reads
 problems in SIF format and passes it to an optimiation solver.  The authors
 of this package are Nick Gould, Dominique Orban and Philippe Toint.
 
-- N. Gould, D. Orban, Ph. Toint. "CUTEst: a Constrained and Unconstrained
+- <<cutest paper>>N. Gould, D. Orban, Ph. Toint. "CUTEst: a Constrained and Unconstrained
   Testing Environment with safe threads for mathematical optimization", \\
   Computational Optimization and Applications, 60(3): 545--557, 2015.
   https://doi.org/10.1007/s10589-014-9687-3
@@ -31,8 +31,10 @@ For the SIF problem files:
 
 ** Installing CUTEst
 
-_Before installing the package_, you will need to set a few environment
-variables to make sure everything runs smoothly.
+_Before installing the package_, you will need to install Fortran (gfortran)
+and C (gcc) compilers and set a few environment variables to make sure
+everything runs smoothly (maybe).  Set the following variables inside your
+.bashrc file (see [[export][.bashrc exporting variables]]):
 
 | Variable   | Description                         | Example                                   |
 |------------+-------------------------------------+-------------------------------------------|
@@ -42,16 +44,22 @@ variables to make sure everything runs smoothly.
 | $MYMATLAB  | Location of Matlab                  | MYMATLAB=/Applications/MATLAB_R2015a.app/ |
 | $MASTSIF   | Location of the SIF files directory |                                           |
 
-You also need to make sure you have Fortran (gfortran) and C (gcc) compilers
-installed on your machine.
-
 _If you are using CUTEst with Matlab_, you need to have gcc/gfortran version
 4.3.  You can install it via macports: ~port install gcc43~.  You will also
 need to create symbolic links named "gfortran-4.3" and "gcc-4.3" somewhere
 in your $PATH to point to the actual 4.3 compilers because that is what
-CUTEst will look for (see [[symbolic links][symbolic link creation]]).
+CUTEst will look for.  (See also [[symbolic links]]).
 
-To install CUTEst, go into $CUTEST (the cutest directory) and run the
+The easiest way is to create the links inside your personal ~bin~ directory:
+#+BEGIN_SRC
+>> cd $HOME/bin;
+>> ln -s /opt/local/bin/gcc-mp-4.3 gcc-4.3
+>> ln -s /opt/local/bin/gfotran-mp-4.3 gfortran-4.3
+#+END_SRC
+(Make sure ~$HOME/bin~ is in your $PATH!)
+
+
+_To install CUTEst_, go into $CUTEST (the cutest directory) and run the
 install script:
 #+BEGIN_SRC
 >> cd $CUTEST
@@ -61,7 +69,7 @@ The script will ask you several questions about your system.  If you are not
 using CUTEst with Matlab, choose the "gfortran" and "gcc" options.
 
 _After installing CUTEst_, you will need to set two more environment
-variables.
+variables in your .bashrc file:
 
 | Variable      | Description                                                |
 |---------------+------------------------------------------------------------|
@@ -70,6 +78,104 @@ variables.
 These variables consist of 3 components that depend on the system you're
 on.  On MacOS with gfortran, it should be ~mac64.osx.gfo~.  On Linux,
 ~pc64.lnx.gfo~.
+
+_In addition for CUTEst with Matlab_, edit the package file named 'matlab'
+in $CUTEST/packages/defaults.
+Change the line that defines the variable "PACKLIBS" to read:
+#+BEGIN_SRC
+export PACKLIBS="-L/opt/local/lib/gcc43 -lgfortran"
+#+END_SRC
+
+** Testing the CUTEst installation
+
+_For non-Matlab CUTEst_, run the following command to test that your
+installation was successful:
+#+BEGIN_SRC
+>> runcutest -p gen77 -D HS118
+#+END_SRC
+This command tells CUTEst to decode problem HS118 and use the package "gen77"
+(in this case, "gen77" is a dummy package included in CUTEst).  You should
+see the following:
+
+#+BEGIN_SRC
+  ********************************
+  *                              *
+  *       HELLO FROM GEN!        *
+  *     (DOUBLE PRECISION)       *
+  *                              *
+  ********************************
+
+  OPTIMAL SOLUTION FOUND
+  THE ANSWER IS    41.999999999999901
+  ************************ CUTEst statistics ************************
+  Package used             :  GEN
+  Variant                  :  name of a variant, if needed
+  Problem                  :  HS118
+  # variables              =              15
+  # constraints            =              17
+  # linear constraints     =              17
+  # equality constraints   =               0
+  # inequality constraints =              17
+  # bounds                 =              15
+  # objective functions    =            0.00
+  # objective gradients    =            0.00
+  # objective Hessians     =            0.00
+  # constraints functions  =            0.00
+  # constraints gradients  =            0.00
+  # constraints Hessians   =            0.00
+  Exit code                =               0
+  Final f                  =   0.4200000E+02
+  Set up time              =            0.00 seconds
+  Solve time               =            0.00 seconds
+ ******************************************************************
+#+END_SRC
+
+For more Fortran/CUTEst function, refer to Appendix A in the [[CUTEst paper]].
+You can also use the ~man~ command at the terminal to get more information
+on a particular CUTEst function.  For example:
+#+BEGIN_SRC
+>> man cutest_cofg
+  NAME
+         CUTEST_cofg - CUTEst tool to evaluate function value and possibly gradient.
+
+  SYNOPSIS
+         CALL CUTEST_cofg( status, n, X, f, G, grad )
+  ...
+#+END_SRC
+
+_For Matlab CUTEst_, start Matlab and run the following commands:
+#+BEGIN_SRC
+>> unix('cutest2matlab HS118');
+>> prob = cutest_setup()
+prob =
+
+         n: 15
+         m: 17
+      nnzh: 15
+      nnzj: 39
+         x: [15x1 double]
+        bl: [15x1 double]
+        bu: [15x1 double]
+         v: [17x1 double]
+        cl: [17x1 double]
+        cu: [17x1 double]
+    equatn: [17x1 logical]
+    linear: [17x1 logical]
+      name: 'HS118     '
+#+END_SRC
+The first command decodes the problem ~HS118~.  The second command extract the
+problem information into a Matlab variable called ~prob~.  ~prob~ should
+contain several components.  In particular, ~prob.n~ and ~prob.m~ are the number
+of variables and constraints in the problem (for HS118, these should be 15
+and 17).
+
+For more Fortran/CUTEst function, refer to Appendix B in the [[CUTEst paper]].
+In Matlab, you can also use the ~help~ command.  For example,
+#+BEGIN_SRC
+>> help cutest_obj
+  Return function value and gradient if requested.
+  Usage:  f = cutest_obj(x)  or  [f,g] = cutest_obj(x)
+#+END_SRC
 
 ** Troubleshooting
 - Errors encountered when compiling a Matlab mex-file or when installing CUTEst with Matlab:

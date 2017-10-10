@@ -1,21 +1,21 @@
-#+BEGIN_COMMENT
-Basic info on unix (very incomplete)
-#+END_COMMENT
+#+begin_comment
+basic info on unix (very incomplete)
+#+end_comment
 
-* Unix Tutorial
+* Unix tutorial
 
-In this section, we list and describe a few basic unix commands for the
-terminal.  Some commands have flags (options) that are indicated with a dash
-followed by one or more letters.  Environment variables are variables
-defined within a Terminal setting.  These variables are start with a "$" and
+in this section, we list and describe a few basic unix commands for the
+terminal.  some commands have flags (options) that are indicated with a dash
+followed by one or more letters.  environment variables are variables
+defined within a terminal setting.  these variables are start with a "$" and
 usually upper-case.
 
-Two important environment variables are $HOME and $PATH.  $HOME defines your
-"home" directory.  On MacOS, this is usually something like ~/Users/elwong~;
-on Linux systems, it's usually like ~/usr/people/elwong~ or ~/home/elwong~.
+two important environment variables are $home and $path.  $home defines your
+"home" directory.  on macos, this is usually something like ~/users/elwong~;
+on linux systems, it's usually like ~/usr/people/elwong~ or ~/home/elwong~.
 
-The $PATH variables defines the path along which the system searches for
-files.  It can be customized inside your bashrc file (see [[recommendations]]
+the $path variables defines the path along which the system searches for
+files.  it can be customized inside your bashrc file (see [[recommendations]]
 and [[bashrc][bashrc file]]).
 
 In the following sections, the symbol >> represents the prompt (where you
@@ -205,6 +205,9 @@ The commands to change the owner or group of a file or directory are ~chown~
   >> export <varName>=<value>
   >> export CUTEST=~/cutest
   #+END_SRC
+  Environment variables set at the terminal are temporary -- they are set
+  only within that terminal window, and once you exit, the settings are
+  lost.  To permanently set environment variables, use a [[bashrc][.bashrc file]].
 
 ** Other commands and tips
 - Special Terminal symbols:
@@ -261,24 +264,40 @@ The commands to change the owner or group of a file or directory are ~chown~
   second command will create the link but name it "gfortran-4.3".
 
 * <<bashrc>>Bashrc file
-** Aliases
-In your .bashrc, you can create aliases to commands that you use a lot.
+.bashrc is a file inside your $HOME directory that customizes and defines
+environment variables and commands for your environment.
 
-For examples, instead of typing ~clear~ everytime, you can alias 'c' to the
-command ~clear~ with the following
+** .bash_profile
+Depending on your system, you may need a .bash_profile and .bashrc file.  It
+is recommended that you modify .bashrc with your customized variables and
+settings, but have .bash_profile "source" your .bashrc.  To do this, create
+a .bash_profile with the following lines:
 #+BEGIN_SRC
-alias c='clear'
+if [ -f ~/.bashrc ]; then
+   source ~/.bashrc
+fi
 #+END_SRC
-Another example is to alias ~ls -l~ to 'l'
+
+** <<export>>Setting (exporting) environment variables
+Use your .bashrc file to set environment variables.
+
+For example, you can set the CUTEst environment variables.
 #+BEGIN_SRC
-alias l='ls -l'
+ARCHDEFS="${HOME}/cutest/archdefs"
+SIFDECODE="${HOME}/cutest/sifdecode"
+CUTEST="${HOME}/cutest/cutest"
+MYMATLAB="${MATLAB}"
+export ARCHDEFS  SIFDECODE  CUTEST  MYMATLAB
 #+END_SRC
-You can also create an alias to go to a particular directory
+In this example, the directories ~archdefs~, ~cutest~, and ~sifdecode~ are
+in ~$HOME/cutest~.
+
+
+You can also add directories to the Matlab PATH via .bashrc:
 #+BEGIN_SRC
-alias sn7='cd ~/snopt7'
+export MATLABPATH="${CUTEST}/src/matlab:${MATLABPATH}"
 #+END_SRC
-When you type ~sn7~ at the command line, this will execute ~cd ~/snopt7~ and
-take you to the directory "snopt7" in your HOME directory.
+
 
 ** <<recommendations>>PATH variable
 The $PATH variable is probably one of the more important variables that
@@ -296,3 +315,22 @@ To do this you should have the following lines in your ~.bashrc~ file:
 PATH=${HOME}/bin:${PATH}
 export PATH
 #+END_SRC
+
+** <<aliases>>Aliases
+In your .bashrc, you can create aliases to commands that you use a lot.
+
+For examples, instead of typing ~clear~ everytime, you can alias 'c' to the
+command ~clear~ with the following
+#+BEGIN_SRC
+alias c='clear'
+#+END_SRC
+Another example is to alias ~ls -l~ to 'l'
+#+BEGIN_SRC
+alias l='ls -l'
+#+END_SRC
+You can also create an alias to go to a particular directory
+#+BEGIN_SRC
+alias sn7='cd ~/snopt7'
+#+END_SRC
+When you type ~sn7~ at the command line, this will execute ~cd ~/snopt7~ and
+take you to the directory "snopt7" in your HOME directory.

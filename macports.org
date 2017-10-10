@@ -4,7 +4,7 @@ Information on Macports
 
 #+OPTIONS: ^:nil
 
-* MacPorts
+* <<macports>>MacPorts
 [[http://macports.org][MacPorts]] is a package management system for MacOS.  It is a relatively easy
 process to install required software packages on your system.  All packages
 or /ports/ are installed in the directory ~/opt/local/bin~.  Remember to
@@ -90,11 +90,12 @@ port info <package>
 *** Development tools
 - ~valgrind~ (or ~valgrind-devel~)
 *** Latex
-Generally, we recommend installing the full version of texlive via Macports:
+Generally, we recommend installing the full version of texlive (and with
+documentation by default) via Macports:
 ~texlive +full~.  There is also a ~+medium~ variant; however, this variant
 does not include some of the science-related Latex packages, which will need
 to be installed manually.  To install TexLive /without/ documentation, add
-the ~-doc~ variant, e.g., ~texlive +medium -doc~.
+the ~-doc~ variant, e.g., ~texlive +full -doc~ (to save space and time).
 *** Python
 - ~python3~
 - ~python27~

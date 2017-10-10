@@ -32,8 +32,8 @@ ul li { padding: .15em .25em .15em .25em; }
 h1 { font-size: 1.5em; margin: 0em; padding: 0em; }
 h2 { font-size: 1.5em; margin-bottom: .5em;
      padding-top: 5px; padding-left: 0em; border-bottom: 1px solid black;}
-h3 { color: #444; font-size: 1.2em; margin: 0em; margin-bottom: .2em; }
-h4 { color: #444; }
+h3 { color: #444; font-size: 1.2em; margin: 0em; margin-top: 1em; margin-bottom: .2em; border-bottom: 1px dashed #555; }
+h4 { color: #444; margin: 0; margin-top: .4em; }
 
 a { color: #5fbdbd; text-decoration: none; }
 a:hover { text-decoration: underline; }
@@ -44,3 +44,5 @@ td { vertical-align: top; padding: .2em .5em .2em .5em;  border: 1px solid black
 td.right { text-align: right; }
 
 .example { margin: 0em 1em 1em 1em; }
+
+pre { box-shadow: none; background-color: #f4fafc; }

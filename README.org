@@ -9,6 +9,7 @@ up-to-date as possible.
 - unix.org :: Basic descriptions of some of the common unix commands.  When
               in doubt, use google (or the ~man~ command) for more help.
 - macports.org :: Macports commands and a list of ports you may find useful.
+- computing.org :: Basic compiler commands and info
 - cutest.org :: Information on how to download, install, configure CUTEst.
 - cvs.org :: Info on using cvs, a version control system.
 - svn.org :: Info on using subversion, a version control system.
