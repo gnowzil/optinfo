@@ -1,0 +1,87 @@
+#+BEGIN_COMMENT
+Software Development
+#+END_COMMENT
+
+#+OPTIONS: ^:nil
+
+* Software Development
+** Compilers
+GNU Compiler collection (GCC) is a free collection of compilers for many
+languages including C (~gcc~), C++ (=g++=), and Fortran (~gfortran~).
+
+Multiple versions are available for download via [[macports][Macports]] (it's typically
+best to use the latest stable version).
+
+Intel also has a Fortran compiler (which is available to students for free
+https://software.intel.com/en-us/qualify-for-free-software/student).
+Generally speaking, Intel's Fortran compiler ~ifort~ has more Fortran
+features implemented than GCC.
+
+*** Basic compiler commands
+- Compiling
+  The following command calls the GNU Fortran compiler ~gfortran~ to compile
+  (~-c~) the file ~myfile.f90~:
+  #+BEGIN_SRC
+  >> gfortran -c myfile.f90
+  #+END_SRC
+  After executing this command, you should see a newly created file ~test.o~
+  (~.o~ files are called "object files").
+
+- Building
+  After compiling, create an "executable" from the object file:
+  #+BEGIN_SRC
+  >> gfortran -o myExecutable test.o
+  #+END_SRC
+  The name after the flag ~-o~ will be the name of the output (in this case
+  ~myExecutable~).  This is created from the object file ~test.o~, created
+  via a "compile" command as above.  The executable can now be run/execute
+  (~>> ./myExecutable~).
+
+  If you have multiple object files, you can just add them to the build
+  command, e.g.,
+  #+BEGIN_SRC
+  >> gfortran -o myExecutable test1.o test2.o test3.o
+  #+END_SRC
+  (where ~test1.o~, ~test2.o~, and ~test3.o~ are created from a "compile"
+  command).
+
+- Linking
+  Often, your code will depend on external libraries (e.g., BLAS libraries)
+  that you must "link" your code to.
+  #+BEGIN_SRC
+  >> gfortran -o myExecutable test.o -L/path/to/lib -lblas
+  #+END_SRC
+  Here, we link to a library named "blas" that should be in the directory
+  ~/path/to/lib~.  The ~-L~ switch tells the compiler where to look for a
+  library and the ~-l~ switch tells the compiler the name of the library to
+  look for.
+
+*** Compiler options
+- For verbose mode (the compiler will print more info), add the flag ~-v~.
+  #+BEGIN_SRC
+  >> gfortran -v -c myfile.f90
+  #+END_SRC
+
+- To create an executable that can be "debugged", add the flag ~-g~ when
+  compiling:
+  #+BEGIN_SRC
+  >> gfortran -v -g -c myfile.f90
+  #+END_SRC
+
+- For optimized code, add ~-O~ (capital letter o, not zero):
+  #+BEGIN_SRC
+  >> gfortran -O -c myfile.f90
+  #+END_SRC
+
+- To make the compiler print ALL warning messages (the flag is ~-W~ with "all"):
+  #+BEGIN_SRC
+  >> gfortran -Wall -c myfile.f90
+  #+END_SRC
+
+
+*** Makefiles
+A Makefile is a file containing a set of commands that can be used with the
+~make~ tool.  It is useful if you are compiling a set of files.
+
+
+** Developing with Fortran and Matlab
