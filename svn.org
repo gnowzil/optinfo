@@ -3,29 +3,29 @@ Information on SVN
 #+END_COMMENT
 
 * SVN Commands
-The commands and information here are specific to our (UCSD/maximal) setup.
+The commands and information here are specific to our setup.
 
-There is a user "svn" on maximal.  Our repositories live in the home
-directory of this user.
+There is a user "svn".  Our repositories live in the home directory of this
+user.
 
 In .bashrc, export the variable SVNROOT:
 #+BEGIN_SRC
-export SVNROOT=svn+ssh://maximal.ucsd.edu/usr/people/svn
+export SVNROOT=svn+ssh://ccom-portal.ucsd.edu/usr/people/svn
 #+END_SRC
 
 ** Admin commands
-- Add user to "svn" group on maximal
+- Add user to "svn" group
   #+BEGIN_SRC
   >> usermod -a -G svn <username>
   #+END_SRC
 
-- To create a repository, login to maximal as 'svn' and in the top home
+- To create a repository, login as 'svn' and in the top home
   directory run:
   #+BEGIN_SRC
   >> svnadmin create <rep name>
   #+END_SRC
 
-- To backup/load a repository, login to maximal as 'svn' and in the top home
+- To backup/load a repository, login as 'svn' and in the top home
   directory run:
   #+BEGIN_SRC
   >> svnadmin dump <rep name> > tmp.svn
