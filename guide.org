@@ -1,0 +1,174 @@
+#+TITLE: Getting Started
+#+AUTHOR: Elizabeth Wong
+#+EMAIL: elwong@ucsd.edu
+#+LANGUAGE: en
+#+OPTIONS: toc:nil h:4 html-postamble:nil html-preamble:t tex:t f:t
+#+OPTIONS: prop:("VERSION")
+#+HTML_DOCTYPE: <!DOCTYPE html>
+#+HTML_HEAD: <link href='//fonts.googleapis.com/css?family=Open+Sans|Lato' rel='stylesheet'/>
+#+HTML_HEAD: <link href="css/style.css" rel="stylesheet" type="text/css" />
+
+#+LINK: ccom-opt  https://ccom.ucsd.edu/~optimizers
+#+LINK: git-optinfo  https://github.com/gnowzil/optinfo
+
+#+HTML: <div class="outline" id="meta">
+| *Author* | {{{author}}} ({{{email}}})    |
+| *Date*   | {{{time(%Y-%m-%d %H:%M:%S)}}} |
+#+HTML: </div>
+
+#+TOC: headlines 3
+#+TOC: tables
+
+#+OPTIONS: ^:nil
+
+* Getting Started
+The first thing you should learn to do is use the Terminal.
+On MacOS, open the Terminal application.  This will get you a command line
+window where you can enter unix commands.  I'd recommend googling for better
+tutorials on the command line.  This [[http://ccom.ucsd.edu/~elwong/info][page]] has some info on basic commands.
+
+One thing you should understand is the ~$HOME~ directory.  On MacOS, this is
+the directory ~/Users/yourName~ (where yourName is your account name).
+Configuration files described below must be saved in this directory.
+
+** Configure your terminal with a bashrc file
+
+Create a file named ~.bash_profile and add the following line:
+#+BEGIN_SRC
+source ~/.bashrc
+#+END_SRC
+
+Create a second file ~.bashrc~, which will hold settings for your working
+environment.  (See [[bashrc]] for more info.)
+
+The following is a "starter" file for your ~.bashrc~ file.  Copy it and save it
+in your ~$HOME~ directory as ~.bashrc~.  This file will set the correct ~PATH~
+for CUTEst and Macports, and CVS and SVN for our group.  Search for "!!" to
+find parts that need to be edited.
+
+#+BEGIN_SRC
+################################################################################
+#! /bin/sh
+#
+# .bashrc example
+#
+# Note: Search for "!!" for parts that need to be modified with your own
+#       information.
+################################################################################
+# Paths
+
+# !! Set MATLAB to the version of MATLAB you will use:
+MATLAB="/Applications/MATLAB_R2015aSP1.app"
+
+# Add HOME bin first, then Macports bin, then Matlab bin, then everything else...
+PATH="${HOME}/bin:/opt/local/bin:${MATLAB}/bin:${PATH}"
+
+################################################################################
+# CUTEST/Matlab
+
+MASTSIF="${HOME}/cutest/mastsif"
+export MASTSIF
+
+ARCHDEFS="${HOME}/cutest/archdefs"
+SIFDECODE="${HOME}/cutest/sifdecode"
+CUTEST="${HOME}/cutest/cutest"
+MYMATLAB="${MATLAB}"
+export ARCHDEFS  SIFDECODE  CUTEST  MYMATLAB
+
+# This code will automatically set MYARCH and MYMATLABARCH for CUTEst.
+# It assumes you are using gfortran.
+# !! (you can manually change this if necessary).
+case "${OSTYPE}" in
+    darwin*) cutest_os="mac64.osx" ;;
+    linux*)  cutest_os="pc64.lnx" ;;
+esac
+cutest_com="gfo"
+
+MYARCH="${cutest_os}.${cutest_com}"
+MYMATLABARCH="${cutest_os}.${cutest_com}"
+export MYARCH  MYMATLABARCH
+
+# Add cutest and sifdec to PATH, MANPATH.
+PATH="${PATH}:${CUTEST}/bin:${SIFDECODE}/bin"
+export PATH
+
+# Add CUTEst to Matlab's PATH
+if [ -z ${MATLABPATH} ]; then
+    MATLABPATH="${CUTEST}/src/matlab"
+else
+    MATLABPATH="${CUTEST}/src/matlab:${MATLABPATH}"
+fi
+export MATLABPATH
+
+################################################################################
+# Add "manual" paths for CUTEst and Macports
+
+if [ -z ${MANPATH} ]; then
+    MANPATH="${SIFDECODE}/man:${CUTEST}/man:/opt/local/share/man"
+else
+MANPATH="${MANPATH}"
+    MANPATH="${SIFDECODE}/man:${CUTEST}/man:${MANPATH}:/opt/local/share/man"
+fi
+export MANPATH
+
+################################################################################
+# SVN/CVS
+
+# !! Insert your account name into the definitions below for SVNROOT and
+#    CVSROOT:
+
+# SVN
+SVNROOT=svn+ssh://<YOUR_USER_NAME>@ccom-portal.ucsd.edu/usr/people/svn
+export SVNROOT
+
+# CVS
+CVSUMASK=002
+CVS_RSH=ssh
+CVSROOT=:ext:<YOUR USER NAME>@ccom-portal.ucsd.edu:/usr/people/cvs/cvsroot
+export CVSUMASK CVS_RSH CVSROOT
+
+################################################################################
+#+END_SRC
+
+** Install Macports
+To do this, first install XCode (via the App Store) if it isn't already
+installed.  Open Xcode when it's finished installing and agree to the
+license that may pop up.  You will also need to install the XCode command
+line tools.  Open the Terminal and run the following command:
+#+BEGIN_SRC
+>> xcode-select --install
+#+END_SRC
+Now install Macports by carefully following the directions on the macports
+website https://www.macports.org/install.php.  Read the entire page before
+starting.  After installing, make sure to run
+#+BEGIN_SRC
+>> sudo port -v selfupdate
+#+END_SRC
+
+Macports installs things into ~/opt/local/bin~, which has been added to your
+~$PATH~ in the above ~.bashrc~ file.
+
+*** Install the following ports:
+Once Macports is installed, install the following ports.
+The command is
+#+BEGIN_SRC
+>> sudo port install <port name>
+#+END_SRC
+For example,
+#+BEGIN_SRC
+>> sudo port install subversion
+#+END_SRC
+
+**** Necessary ports
+- ~subversion~
+- ~cvs~
+- ~gcc7~ (current C/Fortran/C++ compilers)
+- ~gcc43~ (if you are planning on interfacing with Matlab)
+- ~xorg-server~
+
+**** Optional ports
+- ~texlive +full -doc~ (if you need LaTeX)
+- ~emacs +x11 +gtk~ (for the emacs editor)
+- ~python3~
+- ~py-numpy~
+- ~py-scipy~
