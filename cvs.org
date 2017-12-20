@@ -5,11 +5,12 @@ Information on CVS
 
 * CVS
 ** Environment setup
-Add the following lines to your .bashrc file:
+Add the following lines to your ~.bashrc~ file to configure CVS.  Make sure
+to insert your own account name in the definition for ~$CVSROOT~:
 #+BEGIN_SRC
 CVSUMASK=002
 CVS_RSH=ssh
-CVSROOT=:ext:yourLoginName@ccom-portal.ucsd.edu:/usr/people/cvs/cvsroot
+CVSROOT=:ext:<YOUR_LOGIN_NAME>@ccom-portal.ucsd.edu:/usr/people/cvs/cvsroot
 export CVSUMASK CVS_RSH CVSROOT
 #+END_SRC
 

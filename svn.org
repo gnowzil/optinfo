@@ -8,9 +8,10 @@ The commands and information here are specific to our setup.
 There is a user "svn".  Our repositories live in the home directory of this
 user.
 
-In .bashrc, export the variable SVNROOT:
+In .bashrc, export the variable ~$SVNROOT~.  Make sure to set your account
+name in the definition for ~$SVNROOT:~
 #+BEGIN_SRC
-export SVNROOT=svn+ssh://ccom-portal.ucsd.edu/usr/people/svn
+export SVNROOT=svn+ssh://<YOUR_USER_NAME>@ccom-portal.ucsd.edu/usr/people/svn
 #+END_SRC
 
 ** Admin commands

@@ -31,7 +31,7 @@ For the SIF problem files:
 
 ** Installing CUTEst
 
-_Before installing the package_, you will need to install Fortran (gfortran)
+*_Before installing the package_*, you will need to install Fortran (gfortran)
 and C (gcc) compilers and set a few environment variables to make sure
 everything runs smoothly (maybe).  Set the following variables inside your
 .bashrc file (see [[export][.bashrc exporting variables]]):
@@ -44,7 +44,7 @@ everything runs smoothly (maybe).  Set the following variables inside your
 | $MYMATLAB  | Location of Matlab                  | MYMATLAB=/Applications/MATLAB_R2015a.app/ |
 | $MASTSIF   | Location of the SIF files directory |                                           |
 
-_If you are using CUTEst with Matlab_, you need to have gcc/gfortran version
+*_If you are using CUTEst with Matlab_*, you need to have gcc/gfortran version
 4.3.  You can install it via macports: ~port install gcc43~.  You will also
 need to create symbolic links named "gfortran-4.3" and "gcc-4.3" somewhere
 in your $PATH to point to the actual 4.3 compilers because that is what
@@ -58,8 +58,30 @@ The easiest way is to create the links inside your personal ~bin~ directory:
 #+END_SRC
 (Make sure ~$HOME/bin~ is in your $PATH!)
 
+Furthermore, you will need to modify some files in Matlab to get it to work
+with CUTEst.
 
-_To install CUTEst_, go into $CUTEST (the cutest directory) and run the
+Go into the directory =<matlab>/bin/<sys>/mexopts/=, where <matlab> is the
+the path to the version of Matlab you are using, and <sys> depends on what
+system you're on.  For example, on MacOS with 2015aSP1, the files are in
+=/Applications/MATLAB_R2015aSP1.app/bin/maci64/mexopts/=.
+
+In this directory, you will see xml files for gfortran, clang, and clang++.
+You will need to edit these files and may need to change the permission in
+order to give you /write/ access (see [[file permissions]]).  The following
+command will make the three files writeable:
+#+BEGIN_SRC
+>> chmod 644 gfortran.xml clang_maci64.xml clang++_maci64.html
+#+END_SRC
+
+Open up these files and search for lines with ~MacOS10.10.sdk~.  You will
+need to add lines for ~MacOSX10.12.sdk~ (for Xcode8) or ~MacOSX10.13.sdk~
+(for Xcode9) wherever you see lines with ~MacOS10.10.sdk~.  While you're
+here, also search the files for =-arch x86_64= and remove them from all of
+the xml files.
+
+
+*_To install CUTEst_*, go into $CUTEST (the cutest directory) and run the
 install script:
 #+BEGIN_SRC
 >> cd $CUTEST
@@ -68,7 +90,7 @@ install script:
 The script will ask you several questions about your system.  If you are not
 using CUTEst with Matlab, choose the "gfortran" and "gcc" options.
 
-_After installing CUTEst_, you will need to set two more environment
+*_After installing CUTEst_*, you will need to set two more environment
 variables in your .bashrc file:
 
 | Variable      | Description                                                |
@@ -79,16 +101,16 @@ These variables consist of 3 components that depend on the system you're
 on.  On MacOS with gfortran, it should be ~mac64.osx.gfo~.  On Linux,
 ~pc64.lnx.gfo~.
 
-_In addition for CUTEst with Matlab_, edit the package file named 'matlab'
-in $CUTEST/packages/defaults.
-Change the line that defines the variable "PACKLIBS" to read:
+*_In addition for CUTEst with Matlab_*, edit the package file named ~matlab~
+in ~$CUTEST/packages/defaults~.
+Change the line that defines the variable ~PACKLIBS~ to read:
 #+BEGIN_SRC
 export PACKLIBS="-L/opt/local/lib/gcc43 -lgfortran"
 #+END_SRC
 
 ** Testing the CUTEst installation
 
-_For non-Matlab CUTEst_, run the following command to test that your
+*_For non-Matlab CUTEst_*, run the following command to test that your
 installation was successful:
 #+BEGIN_SRC
 >> runcutest -p gen77 -D HS118
@@ -143,7 +165,7 @@ on a particular CUTEst function.  For example:
   ...
 #+END_SRC
 
-_For Matlab CUTEst_, start Matlab and run the following commands:
+*_For Matlab CUTEst_*, start Matlab and run the following commands:
 #+BEGIN_SRC
 >> unix('cutest2matlab HS118');
 >> prob = cutest_setup()
@@ -188,7 +210,7 @@ In Matlab, you can also use the ~help~ command.  For example,
   you're on.  For example, on MacOS with 2015aSP1, the files are in
   =/Applications/MATLAB_R2015aSP1.app/bin/maci64/mexopts/=.
 
-  In this file, you will see xml files for gfortran, clang, and clang++.
+  In this directory, you will see xml files for gfortran, clang, and clang++.
   You will need to edit these files and may need to change the permission in
   order to give you /write/ access (see [[file permissions]]).
 

@@ -33,13 +33,14 @@ Configuration files described below must be saved in this directory.
 
 ** Configure your terminal with a bashrc file
 
-Create a file named ~.bash_profile and add the following line:
+Create a file named .bash_profile in your ~$HOME~ directory and add the
+following line:
 #+BEGIN_SRC
 source ~/.bashrc
 #+END_SRC
 
-Create a second file ~.bashrc~, which will hold settings for your working
-environment.  (See [[bashrc]] for more info.)
+Create a second file ~.bashrc~ (also in ~$HOME~ directory), which will hold
+settings for your working environment.  (See [[bashrc]] for more info.)
 
 The following is a "starter" file for your ~.bashrc~ file.  Copy it and save it
 in your ~$HOME~ directory as ~.bashrc~.  This file will set the correct ~PATH~

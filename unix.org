@@ -2,20 +2,19 @@
 basic info on unix (very incomplete)
 #+end_comment
 
-* Unix tutorial
-
-in this section, we list and describe a few basic unix commands for the
-terminal.  some commands have flags (options) that are indicated with a dash
-followed by one or more letters.  environment variables are variables
-defined within a terminal setting.  these variables are start with a "$" and
+* <<unix>>Unix tutorial
+In this section, we list and describe a few basic unix commands for the
+terminal.  Some commands have flags (options) that are indicated with a dash
+followed by one or more letters.  Environment variables are variables
+defined within a terminal setting.  These variables are start with a "$" and
 usually upper-case.
 
-two important environment variables are $home and $path.  $home defines your
-"home" directory.  on macos, this is usually something like ~/users/elwong~;
-on linux systems, it's usually like ~/usr/people/elwong~ or ~/home/elwong~.
+Two important environment variables are ~$HOME~ and ~$PATH~.  ~$HOME~ defines your
+"home" directory.  On MacOS, this is usually ~/Users/elwong~; on Linux/Unix
+systems, it's usually ~/usr/people/elwong~ or ~/home/elwong~.
 
-the $path variables defines the path along which the system searches for
-files.  it can be customized inside your bashrc file (see [[recommendations]]
+The ~$PATH~ variable defines the path along which the system searches for
+files.  It can be customized inside your ~.bashrc~ file (see [[recommendations]]
 and [[bashrc][bashrc file]]).
 
 In the following sections, the symbol >> represents the prompt (where you
@@ -34,8 +33,8 @@ For example,
 
 ** Basic commands
 *** Navigating in the Terminal
-When you first open a Terminal window, you should be in your $HOME
-directory.  You can use the command ~pwd~ to verify or display your $HOME
+When you first open a Terminal window, you should be in your ~$HOME~
+directory.  You can use the command ~pwd~ to verify or display your ~$HOME~
 directory location.
 
 - Show current location:
@@ -47,7 +46,7 @@ directory location.
   #+BEGIN_SRC
   >> cd <directory>
   #+END_SRC
-- Go to the $HOME directory:
+- Go to the ~$HOME~ directory:
   #+BEGIN_SRC
   >> cd
   >> cd ~
@@ -103,7 +102,7 @@ directory location.
   >> cp <directory>/  <newDir>                     (copies contents of directory)
   #+END_SRC
   For example, to copy the file "mydata.txt" to a new directory "work" in my
-  $HOME directory:
+  ~$HOME~ directory:
   #+BEGIN_SRC
   >> cp mydata.txt ~/work/
   #+END_SRC
@@ -222,7 +221,7 @@ The commands to change the owner or group of a file or directory are ~chown~
   | *      | Wildcard symbol                        |
 
   You can use these symbols in any of the command described.  For example,
-  to move a file "myfile.txt" in my HOME directory to my current location:
+  to move a file "myfile.txt" in my ~$HOME~ directory to my current location:
   #+BEGIN_SRC
   >> mv ~/myfile.txt  .
   #+END_SRC
@@ -260,26 +259,24 @@ The commands to change the owner or group of a file or directory are ~chown~
   >> ln -s /opt/local/bin/gfortran-mp-4.3  ~/bin/gfortran-4.3
   #+END_SRC
   The first command will create a link with the same name as the target
-  (e.g, gfortran-mp-4.3) in the directory "bin" in your HOME directory.  The
-  second command will create the link but name it "gfortran-4.3".
+  (e.g, ~gfortran-mp-4.3~) in the directory "bin" in your ~$HOME~ directory.
+  The second command will create the link but name it "gfortran-4.3".
 
 * <<bashrc>>Bashrc file
-.bashrc is a file inside your $HOME directory that customizes and defines
+~.bashrc~ is a file inside your ~$HOME~ directory that customizes and defines
 environment variables and commands for your environment.
 
 ** .bash_profile
-Depending on your system, you may need a .bash_profile and .bashrc file.  It
-is recommended that you modify .bashrc with your customized variables and
-settings, but have .bash_profile "source" your .bashrc.  To do this, create
-a .bash_profile with the following lines:
+Depending on your system, you may need a ~.bash_profile~ and ~.bashrc~ file.  It
+is recommended that you modify ~.bashrc~ with your customized variables and
+settings, but have ~.bash_profile~ "source" your ~.bashrc~.  To do this, create
+a ~.bash_profile~ in your ~$HOME~ directory with the following line:
 #+BEGIN_SRC
-if [ -f ~/.bashrc ]; then
-   source ~/.bashrc
-fi
+source ~/.bashrc
 #+END_SRC
 
 ** <<export>>Setting (exporting) environment variables
-Use your .bashrc file to set environment variables.
+Use your ~.bashrc~ file to set environment variables.
 
 For example, you can set the CUTEst environment variables.
 #+BEGIN_SRC
@@ -293,22 +290,22 @@ In this example, the directories ~archdefs~, ~cutest~, and ~sifdecode~ are
 in ~$HOME/cutest~.
 
 
-You can also add directories to the Matlab PATH via .bashrc:
+You can also add directories to the Matlab ~PATH~ via ~.bashrc~:
 #+BEGIN_SRC
 export MATLABPATH="${CUTEST}/src/matlab:${MATLABPATH}"
 #+END_SRC
 
 
 ** <<recommendations>>PATH variable
-The $PATH variable is probably one of the more important variables that
+The ~$PATH~ variable is probably one of the more important variables that
 needs to be set correctly to make everything work.  It defines the path
 along which the system searches for files.  The order in which locations are
-specified in PATH is important because the system will always use the *first*
+specified in ~PATH~ is important because the system will always use the *first*
 match it finds.
 
-It is recommended that you create a ~bin~ directory in your HOME directory
+It is recommended that you create a ~bin~ directory in your ~$HOME~ directory
 (~mkdir ~/bin~).  This directory should be placed at the beginning of your
-PATH variable so that anything in ~/bin is found first.
+~PATH~ variable so that anything in ~/bin is found first.
 
 To do this you should have the following lines in your ~.bashrc~ file:
 #+BEGIN_SRC
@@ -317,7 +314,7 @@ export PATH
 #+END_SRC
 
 ** <<aliases>>Aliases
-In your .bashrc, you can create aliases to commands that you use a lot.
+In your ~.bashrc~, you can create aliases to commands that you use a lot.
 
 For examples, instead of typing ~clear~ everytime, you can alias 'c' to the
 command ~clear~ with the following
@@ -333,4 +330,4 @@ You can also create an alias to go to a particular directory
 alias sn7='cd ~/snopt7'
 #+END_SRC
 When you type ~sn7~ at the command line, this will execute ~cd ~/snopt7~ and
-take you to the directory "snopt7" in your HOME directory.
+take you to the directory "snopt7" in your ~$HOME~ directory.

@@ -26,7 +26,6 @@ possible.
 
 These files are hosted on [[git-optinfo]].
 
-
 #+INCLUDE: "./unix.org" :minlevel 1
 #+INCLUDE: "./macports.org" :minlevel 1
 #+INCLUDE: "./computing.org" :minlevel 1
@@ -34,3 +33,4 @@ These files are hosted on [[git-optinfo]].
 #+INCLUDE: "./cutest.org" :minlevel 1
 #+INCLUDE: "./cvs.org" :minlevel 1
 #+INCLUDE: "./svn.org" :minlevel 1
+
