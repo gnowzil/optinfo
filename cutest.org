@@ -16,79 +16,62 @@ of this package are Nick Gould, Dominique Orban and Philippe Toint.
   Computational Optimization and Applications, 60(3): 545--557, 2015.
   https://doi.org/10.1007/s10589-014-9687-3
 
-CUTEst is comprised of three packages: archdefs, SIFDecode, and CUTEst.  To
-download archdefs, SIFDecode and CUTEst:
+CUTEst is comprised of three packages: archdefs, SIFDecode, and CUTEst, all
+of which are are hosted on github (https://github.com/ralna/CUTEst).
+
+To 'git clone' these repositories:
 #+BEGIN_SRC
->> svn checkout --username anonymous http://ccpforge.cse.rl.ac.uk/svn/cutest/archdefs/trunk ./archdefs
->> svn checkout --username anonymous http://ccpforge.cse.rl.ac.uk/svn/cutest/sifdecode/trunk ./sifdecode
->> svn checkout --username anonymous http://ccpforge.cse.rl.ac.uk/svn/cutest/cutest/trunk ./cutest
+>> git clone https://github.com/ralna/CUTEst.git
+>> git clone https://github.com/ralna/SIFDecode.git
+>> git clone https://github.com/ralna/ARCHDefs.git
 #+END_SRC
 
 For the SIF problem files:
 #+BEGIN_SRC
->> svn checkout --username anonymous http://ccpforge.cse.rl.ac.uk/svn/cutest/sif/trunk ./sif
+>> git clone https://bitbucket.org/optrove/sif
 #+END_SRC
 
-** Installing CUTEst
+Currently, there are forked versions of CUTEst, SIFDecode, and ARCHDefs,
+which have been modified to work with MacOS, ifort (Intel Fortran compiler),
+and current versions of Matlab.  These are also on github:
+#+BEGIN_SRC
+>> git clone https://github.com/ucsd-optimizers/CUTEst.git
+>> git clone https://github.com/ucsd-optimizers/SIFDecode.git
+>> git clone https://github.com/ucsd-optimizers/ARCHDefs.git
+#+END_SRC
 
-*_Before installing the package_*, you will need to install Fortran (gfortran)
-and C (gcc) compilers and set a few environment variables to make sure
-everything runs smoothly (maybe).  Set the following variables inside your
-.bashrc file (see [[export][.bashrc exporting variables]]):
+** Requirements
 
+*Software/Compilers*
+| Compilers                    | Notes                                                                                                                                                                                                  |
+|------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| GNU gfortran compiler        | On MacOS, can be installed via Macports.                                                                                                                                                               |
+| Intel Fortran compiler ifort | This is required if you want to use CUTEst with Matlab.  Intel Parallel Studio XE is available for free to students -- https://software.intel.com/en-us/parallel-studio-xe/choose-download/student-mac |
+|                              |                                                                                                                                                                                                        |
+
+*Environment Variables*
 | Variable   | Description                         | Example                                   |
 |------------+-------------------------------------+-------------------------------------------|
 | $ARCHDEFS  | Location of the archdefs directory  |                                           |
 | $SIFDECODE | Location of the sifdecode directory |                                           |
 | $CUTEST    | Location of the cutest directory    |                                           |
-| $MYMATLAB  | Location of Matlab                  | MYMATLAB=/Applications/MATLAB_R2015a.app/ |
+| $MYMATLAB  | Location of Matlab                  | MYMATLAB=/Applications/MATLAB_R2019a.app/ |
 | $MASTSIF   | Location of the SIF files directory |                                           |
 
-*_If you are using CUTEst with Matlab_*, you need to have gcc/gfortran version
-4.3.  You can install it via macports: ~port install gcc43~.  You will also
-need to create symbolic links named "gfortran-4.3" and "gcc-4.3" somewhere
-in your $PATH to point to the actual 4.3 compilers because that is what
-CUTEst will look for.  (See also [[symbolic links]]).
-
-The easiest way is to create the links inside your personal ~bin~ directory:
-#+BEGIN_SRC
->> cd $HOME/bin;
->> ln -s /opt/local/bin/gcc-mp-4.3 gcc-4.3
->> ln -s /opt/local/bin/gfotran-mp-4.3 gfortran-4.3
-#+END_SRC
-(Make sure ~$HOME/bin~ is in your $PATH!)
-
-Furthermore, you will need to modify some files in Matlab to get it to work
-with CUTEst.
-
-Go into the directory =<matlab>/bin/<sys>/mexopts/=, where <matlab> is the
-the path to the version of Matlab you are using, and <sys> depends on what
-system you're on.  For example, on MacOS with 2015aSP1, the files are in
-=/Applications/MATLAB_R2015aSP1.app/bin/maci64/mexopts/=.
-
-In this directory, you will see xml files for gfortran, clang, and clang++.
-You will need to edit these files and may need to change the permission in
-order to give you /write/ access (see [[file permissions]]).  The following
-command will make the three files writeable:
-#+BEGIN_SRC
->> chmod 644 gfortran.xml clang_maci64.xml clang++_maci64.html
-#+END_SRC
-
-Open up these files and search for lines with ~MacOS10.10.sdk~.  You will
-need to add lines for ~MacOSX10.12.sdk~ (for Xcode8) or ~MacOSX10.13.sdk~
-(for Xcode9) wherever you see lines with ~MacOS10.10.sdk~.  While you're
-here, also search the files for =-arch x86_64= and remove them from all of
-the xml files.
-
-
-*_To install CUTEst_*, go into $CUTEST (the cutest directory) and run the
-install script:
+** Installation of CUTEst
+Go into $CUTEST (the CUTEst directory) and run the install script with the
+following commands:
 #+BEGIN_SRC
 >> cd $CUTEST
 >> $ARCHDEFS/install_optsuite
 #+END_SRC
-The script will ask you several questions about your system.  If you are not
-using CUTEst with Matlab, choose the "gfortran" and "gcc" options.
+Follow the prompts.  On MacOS, choose "64-bit MacOS".  On Linux, choose "PC
+with generic 64-bit processor", then "Linux".  If installing with Matlab and
+MacOS, choose "R2015a or later".
+
+By default, our forked version of CUTEst will use the Intel Fortran ifort
+compiler to generate the CUTEst/Matlab interface.
+
 
 *_After installing CUTEst_*, you will need to set two more environment
 variables in your .bashrc file:
@@ -98,15 +81,18 @@ variables in your .bashrc file:
 | $MYARCH       | The architecture that CUTEst has been installed for        |
 | $MYMATLABARCH | The architecture that CUTEst+Matlab has been installed for |
 These variables consist of 3 components that depend on the system you're
-on.  On MacOS with gfortran, it should be ~mac64.osx.gfo~.  On Linux,
-~pc64.lnx.gfo~.
+on.  On MacOS with gfortran, it should be ~mac64.osx.gfo~ (gfortran) or
+~mac64.osx.ifr~ (ifort).  On Linux, ~pc64.lnx.gfo~ (gfortran) or
+~pc64.lnx.ifr~ (ifort).
 
-*_In addition for CUTEst with Matlab_*, edit the package file named ~matlab~
-in ~$CUTEST/packages/defaults~.
-Change the line that defines the variable ~PACKLIBS~ to read:
-#+BEGIN_SRC
-export PACKLIBS="-L/opt/local/lib/gcc43 -lgfortran"
-#+END_SRC
+You can install different configurations (i.e., use different compilers) of
+CUTEst on the same computer.  For example, if you install CUTEst with
+gfortran and also with ifort, you can switch between the two by changing
+$MYARCH/$MYMATLABARCH.
+
+Your software will have to compiled with the same compiler as the version
+used by CUTEst.
+
 
 ** Testing the CUTEst installation
 

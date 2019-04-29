@@ -143,6 +143,6 @@ Our software repositories are structured as follows.
 - To merge a branch into trunk
   Run this in your local checked-out trunk:
   #+BEGIN_SRC
-  >> svn merge --reintegrate $SVNROOT/<software_name>/branches/<branch_name>
+  >> svn merge $SVNROOT/<software_name>/branches/<branch_name>
   >> svn commit -m "Merged branch <branch_name> into trunk"
   #+END_SRC
