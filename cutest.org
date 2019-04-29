@@ -19,25 +19,18 @@ of this package are Nick Gould, Dominique Orban and Philippe Toint.
 CUTEst is comprised of three packages: archdefs, SIFDecode, and CUTEst, all
 of which are are hosted on github (https://github.com/ralna/CUTEst).
 
-To 'git clone' these repositories:
+Currently, there are forked versions of CUTEst, SIFDecode, and ARCHDefs,
+which have been modified to work with MacOS, ifort (Intel Fortran compiler),
+and current versions of Matlab.  These are also on github and can be cloned using the following commands:
 #+BEGIN_SRC
->> git clone https://github.com/ralna/CUTEst.git
->> git clone https://github.com/ralna/SIFDecode.git
->> git clone https://github.com/ralna/ARCHDefs.git
+>> git clone https://github.com/ucsd-optimizers/CUTEst.git
+>> git clone https://github.com/ucsd-optimizers/SIFDecode.git
+>> git clone https://github.com/ucsd-optimizers/ARCHDefs.git
 #+END_SRC
 
 For the SIF problem files:
 #+BEGIN_SRC
 >> git clone https://bitbucket.org/optrove/sif
-#+END_SRC
-
-Currently, there are forked versions of CUTEst, SIFDecode, and ARCHDefs,
-which have been modified to work with MacOS, ifort (Intel Fortran compiler),
-and current versions of Matlab.  These are also on github:
-#+BEGIN_SRC
->> git clone https://github.com/ucsd-optimizers/CUTEst.git
->> git clone https://github.com/ucsd-optimizers/SIFDecode.git
->> git clone https://github.com/ucsd-optimizers/ARCHDefs.git
 #+END_SRC
 
 ** Requirements
