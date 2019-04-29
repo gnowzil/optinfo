@@ -45,9 +45,9 @@ For the SIF problem files:
 *Environment Variables*
 | Variable   | Description                         | Example                                   |
 |------------+-------------------------------------+-------------------------------------------|
-| $ARCHDEFS  | Location of the archdefs directory  |                                           |
-| $SIFDECODE | Location of the sifdecode directory |                                           |
-| $CUTEST    | Location of the cutest directory    |                                           |
+| $ARCHDEFS  | Location of the archdefs directory  | ARCHDEFS=/Users/me/cutest/ARCHDefs        |
+| $SIFDECODE | Location of the sifdecode directory | SIFDECODE=/Users/me/cutest/SIFDecode      |
+| $CUTEST    | Location of the cutest directory    | CUTEST=/Users/me/cutest/CUTEst            |
 | $MYMATLAB  | Location of Matlab                  | MYMATLAB=/Applications/MATLAB_R2019a.app/ |
 | $MASTSIF   | Location of the SIF files directory |                                           |
 
