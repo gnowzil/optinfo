@@ -1,0 +1,23 @@
+* VNC Remote Desktop (Linux)
+
+We want to use our local machine to connect to a remote desktop on our remote machine (for ex, remote.ucsd.edu).
+
+** Starting a VNC Session on the remote server:
+SSH into the remote machine and run the fllowing to start up the virtual desktop
+>>  vncserver :NN
+where NN is a 2-digit number.  This will start a seession on port 59NN, the remote port number. 
+
+
+** Connecting to the remote VNC seession:
+Do the following on your local machine.
+
+*** Create SSH Tunnel to encrypt connection:
+>> ssh -C -f -B -L <local_port_number>:localhost:59NN me@myserver.ucsd.edu
+where 59NN is the number you chose in the previous step.
+
+*** Connect on MacOS:
+Click on the desktop.  Then, on the menu bar, click on the "" and on "Connect to Server".  In the address field, type in "vnc://localhost:<local_port_number>".
+
+
+*** Connect on Linux:
+Use some VNC software (e.g., Remmina on Ubuntu) to connect to localhost:<local_port_number>.
