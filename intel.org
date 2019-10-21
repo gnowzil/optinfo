@@ -1,0 +1,19 @@
+* Using Intel MKL
+
+** Installation
+
+Installing Intel libs via apt-get (Linux/Ubuntu):
+https://software.intel.com/en-us/articles/installing-intel-free-libs-and-python-apt-repo
+
+Installing Intel libs via yum (Linux/RedHat/CentOS):
+https://software.intel.com/en-us/articles/installing-intel-free-libs-and-python-yum-repo
+
+Installing for MacOS:
+https://software.intel.com/en-us/mkl/choose-download/macos
+
+
+** Bashrc setup:
+Add "source /opt/intel/bin/compilervars.sh intel64;" to your .bashrc
+This will automatically define $MKLROOT and update your PATH to include the Intel stuff.
+
+
