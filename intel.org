@@ -17,3 +17,6 @@ Add "source /opt/intel/bin/compilervars.sh intel64;" to your .bashrc
 This will automatically define $MKLROOT and update your PATH to include the Intel stuff.
 
 
+** Linking to MKL:
+Use the Intel Link Advisor:
+https://software.intel.com/en-us/articles/intel-mkl-link-line-advisor
