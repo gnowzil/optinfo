@@ -1,0 +1,62 @@
+
+* Clone git repo
+>> git clone <repo_address>
+
+
+* Add (stage) files for next commit:
+>> git add <file>
+>> git add <directory>
+>> git add .   % everything in current directory
+
+* Unstage files (undo add):
+>> git restore --staged <file>
+
+* Commit changes to repository (after staging):
+>> git commit -m "<message>"
+
+* Updating local repository
+
+** Fetch: git fetch command imports commits from a remote repository into your local repo.  Does not update files!  Use 'git pull' to update files.
+*** Fetch all of the branches from the repository.
+>> git fetch <remote>
+
+*** Fetch specified branch only:
+>> git fetch <remote> <branch>
+
+** Pull (fetch and merge): Fetches and merges changes into local repository.
+>> git pull
+
+* Push commited changes to remote repository:
+>> git push
+
+* Branches
+** List all branches in repository:
+>> git branch
+
+** List remote branches
+>> git branch -r
+
+** Switch to a branch:
+>> git checkout <branch_name>
+
+** Create new branch (does not "checkout" the new branch):
+>> git branch <branch_name>
+
+** Checkout remote branch:
+>> git checkout --track origin/<branch_name>
+
+** Delete local git branch
+>> git branch -d <branch_name>
+
+** Delete remote git branch
+>> git push origin --delete <branch_name>
+
+** Rename the current branch to <branch>.
+>> git branch -m <branch>
+
+* Merging branches:
+The git merge command lets you take the independent lines of development created by git branch and integrate them into a single branch.
+
+** Merge the specified branch into the current branch. 
+>> git merge <branch>
+
