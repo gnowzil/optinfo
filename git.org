@@ -29,10 +29,8 @@ your local repository.  The 'fetch' command imports updates into your local
 repo, but will *not* update the files.  The 'pull' command will fetch and
 merge the updates into the local files of your current branch.
 
-- Fetch all of the branches from the repository.
-  #+BEGIN_SRC
-  >> git fetch <remote>
-  #+END_SRC
+- Fetch all of the branches from the repository:
+  ~>> git fetch <remote>~
 
 - Fetch specified branch only:
   #+BEGIN_SRC
