@@ -17,47 +17,56 @@
 >> git commit -m "<message>"
 
 ** Updating local repository
+Updates in a repository are 'fetched' from the remote repo and merged into
+your local repository.  The 'fetch' command imports updates into your local
+repo, but will *not* update the files.  The 'pull' command will fetch and
+merge the updates into the local files of your current branch.
 
-*** Fetch: git fetch command imports commits from a remote repository into your local repo.  Does not update files!  Use 'git pull' to update files.
-**** Fetch all of the branches from the repository.
->> git fetch <remote>
+- Fetch all of the branches from the repository.
+  >> git fetch <remote>
 
-**** Fetch specified branch only:
->> git fetch <remote> <branch>
+- Fetch specified branch only:
+  >> git fetch <remote> <branch>
 
-*** Pull (fetch and merge): Fetches and merges changes into local repository.
->> git pull
+- Pull (fetch and merge): Fetches and merges changes into local repository
+  (only updates the current branch you are using).
+  >> git pull
+
+  *Note* This will only merge changes into the current branch you are
+  working in.  To pull updates for other branches, you will have to switch
+  (checkout) the other branch and do another git pull.
 
 ** Push commited changes to remote repository:
 >> git push
 
 ** Branches
-*** List all branches in repository:
->> git branch
+- List all branches in repository:
+  >> git branch
 
-*** List remote branches
->> git branch -r
+- List remote branches
+  >> git branch -r
 
-*** Switch to a branch:
->> git checkout <branch_name>
+- Switch to a branch:
+  >> git checkout <branch_name>
 
-*** Create new branch (does not "checkout" the new branch):
->> git branch <branch_name>
+- Create new branch (does not "checkout" the new branch):
+  >> git branch <branch_name>
 
-*** Checkout remote branch:
->> git checkout --track origin/<branch_name>
+- Checkout remote branch:
+  >> git checkout --track origin/<branch_name>
 
-*** Delete local git branch
->> git branch -d <branch_name>
+- Delete local git branch
+  >> git branch -d <branch_name>
 
-*** Delete remote git branch
->> git push origin --delete <branch_name>
+- Delete remote git branch
+  >> git push origin --delete <branch_name>
 
-*** Rename the current branch to <branch>.
->> git branch -m <branch>
+- Rename the current branch to <branch>.
+  >> git branch -m <branch>
 
-** Merging branches:
-The git merge command lets you take the independent lines of development created by git branch and integrate them into a single branch.
+*** Merging branches:
+The git merge command lets you take the independent lines of development
+created by git branch and integrate them into a single branch.
 
-*** Merge the specified branch into the current branch. 
->> git merge <branch>
+- Merge the specified branch into the current branch.
+  >> git merge <branch>
