@@ -6,6 +6,11 @@
 git clone <repo_address>
 #+END_SRC
 
+** State of local repository
+#+BEGIN_SRC
+git status
+#+END_SRC
+
 ** Add (stage) files for next commit:
 #+BEGIN_SRC
 git add <file>
@@ -23,11 +28,15 @@ git restore --staged <file>
 git commit -m "<message>"
 #+END_SRC
 
+** Push commited changes to remote repository:
+~git push~
+
 ** Updating local repository
 Updates in a repository are 'fetched' from the remote repo and merged into
 your local repository.  The 'fetch' command imports updates into your local
 repo, but will *not* update the files.  The 'pull' command will fetch and
-merge the updates into the local files of your current branch.
+merge the updates into the local files of your current branch. (Usually,
+you will want to use the pull command).
 
 - Fetch all of the branches from the repository:
   ~git fetch <remote>~
@@ -43,9 +52,6 @@ merge the updates into the local files of your current branch.
   working in.  To pull updates for other branches, you will have to switch
   (checkout) the other branch and do another git pull.
 
-** Push commited changes to remote repository:
-~git push~
-
 ** Branches
 - List all branches in repository:
   ~git branch~
@@ -58,6 +64,9 @@ merge the updates into the local files of your current branch.
 
 - Create new branch (does not "checkout" the new branch):
   ~git branch <branch_name>~
+
+- Pushing newly created branch to remote repo:
+  ~git push -u origin <branch_name>~
 
 - Checkout remote branch:
   ~git checkout --track origin/<branch_name>~
