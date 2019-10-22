@@ -2,19 +2,25 @@
 * Git
 
 ** Clone git repo
+#+BEGIN_SRC
 >> git clone <repo_address>
-
+#+END_SRC
 
 ** Add (stage) files for next commit:
+#+BEGIN_SRC
 >> git add <file>
 >> git add <directory>
 >> git add .   % everything in current directory
+ #+END_SRC
 
 ** Unstage files (undo add):
+#+BEGIN_SRC
 >> git restore --staged <file>
-
+#+END_SRC
 ** Commit changes to repository (after staging):
+#+BEGIN_SRC
 >> git commit -m "<message>"
+#+END_SRC
 
 ** Updating local repository
 Updates in a repository are 'fetched' from the remote repo and merged into
@@ -23,50 +29,65 @@ repo, but will *not* update the files.  The 'pull' command will fetch and
 merge the updates into the local files of your current branch.
 
 - Fetch all of the branches from the repository.
+  #+BEGIN_SRC
   >> git fetch <remote>
-
+  #+END_SRC
 - Fetch specified branch only:
+  #+BEGIN_SRC
   >> git fetch <remote> <branch>
-
+  #+END_SRC
 - Pull (fetch and merge): Fetches and merges changes into local repository
   (only updates the current branch you are using).
+  #+BEGIN_SRC
   >> git pull
-
+  #+END_SRC
   *Note* This will only merge changes into the current branch you are
   working in.  To pull updates for other branches, you will have to switch
   (checkout) the other branch and do another git pull.
 
 ** Push commited changes to remote repository:
+#+BEGIN_SRC
 >> git push
+#+END_SRC
 
 ** Branches
 - List all branches in repository:
+  #+BEGIN_SRC
   >> git branch
-
+  #+END_SRC
 - List remote branches
+  #+BEGIN_SRC
   >> git branch -r
-
+  #+END_SRC
 - Switch to a branch:
+  #+BEGIN_SRC
   >> git checkout <branch_name>
-
+  #+END_SRC
 - Create new branch (does not "checkout" the new branch):
+  #+BEGIN_SRC
   >> git branch <branch_name>
-
+  #+END_SRC
 - Checkout remote branch:
+  #+BEGIN_SRC
   >> git checkout --track origin/<branch_name>
-
+  #+END_SRC
 - Delete local git branch
+  #+BEGIN_SRC
   >> git branch -d <branch_name>
-
+  #+END_SRC
 - Delete remote git branch
+  #+BEGIN_SRC
   >> git push origin --delete <branch_name>
-
+  #+END_SRC
 - Rename the current branch to <branch>.
+  #+BEGIN_SRC
   >> git branch -m <branch>
-
+  #+END_SRC
 *** Merging branches:
 The git merge command lets you take the independent lines of development
 created by git branch and integrate them into a single branch.
 
 - Merge the specified branch into the current branch.
+  #+BEGIN_SRC
   >> git merge <branch>
+  #+END_SRC
