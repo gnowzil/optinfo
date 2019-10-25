@@ -1,0 +1,10 @@
+* Latex Tips
+
+- Beamer itemize indentation
+  #+BEGIN_SRC
+\setlength{\leftmargini}{1em}   % list
+\setlength{\leftmarginii}{1em}  % list in a list
+\setlength{\leftmarginiii}{1em} % list in a list in a list
+\begin{itemize}
+...
+#+END_SRC
