@@ -1,10 +1,19 @@
 * Latex Tips
 
-- Beamer itemize indentation
+** Itemize
+
+*** Beamer itemize indentation
   #+BEGIN_SRC
 \setlength{\leftmargini}{1em}   % list
 \setlength{\leftmarginii}{1em}  % list in a list
 \setlength{\leftmarginiii}{1em} % list in a list in a list
 \begin{itemize}
+...
+#+END_SRC
+
+*** Itemize spacing between items
+#+BEGIN_SRC
+\begin{itemize}
+\setlength\itemsep{0.7em}
 ...
 #+END_SRC
