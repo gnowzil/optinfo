@@ -87,3 +87,24 @@ created by git branch and integrate them into a single branch.
 - Merge the specified branch into the current branch
   ~git merge <branch>~
 
+** Tags 
+- List all tags:
+  ~git tag~
+  
+- List tags based on pattern:
+  ~git tag -l "<pattern>"~
+
+- Create tag:
+  ~git tag -a <tagname> -m "<message>"~
+  
+- Pushing tags:
+  ~git push origin <tagname>~
+  
+- Delete local tag:
+  ~git tag -d <tagname>~
+  
+- Delete remote tag:
+  ~git push origin --delete <tagname>~
+  
+- Create new branch with tag:
+  ~git checkout -b <new_branch_name> <tagname>~
