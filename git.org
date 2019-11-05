@@ -88,15 +88,18 @@ created by git branch and integrate them into a single branch.
   ~git merge <branch>~
 
 ** Tags 
-- List all tags:
-  ~git tag~
-  
-- List tags based on pattern:
-  ~git tag -l "<pattern>"~
+*** List tags:
+#+BEGIN_SRC
+git tag
+git tag -l "<pattern>"
+#+END_SRC
 
-- Create tag:
-  ~git tag -a <tagname> -m "<message>"~
-  
+*** Create tag:
+#+BEGIN_SRC
+git tag -a <tagname> -m "<message>"
+#+END_SRC
+
+*** More tags:
 - Pushing tags:
   ~git push origin <tagname>~
   
