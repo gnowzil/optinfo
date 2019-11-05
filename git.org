@@ -102,6 +102,9 @@ git tag -a <tagname> -m "<message>"
 *** Modifying tag:
 
 When a tag is checked out, you will enter "DETACHED HEAD" state.  If you need to modify the files in a tag (fix bugs, update files, etc.), then you will have to create a new branch to commit and push your updates:
+- Checkout tag
+  ~git checkout <tagname>~
+
 - Create new branch with tag:
   ~git checkout -b <new_branch_name> <tagname>~
 
