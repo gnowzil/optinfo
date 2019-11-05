@@ -99,6 +99,12 @@ git tag -l "<pattern>"
 git tag -a <tagname> -m "<message>"
 #+END_SRC
 
+*** Modifying tag:
+
+When a tag is checked out, you will enter "DETACHED HEAD" state.  If you need to modify the files in a tag (fix bugs, update files, etc.), then you will have to create a new branch to commit and push your updates:
+- Create new branch with tag:
+  ~git checkout -b <new_branch_name> <tagname>~
+
 *** More tags:
 - Pushing tags:
   ~git push origin <tagname>~
@@ -109,5 +115,3 @@ git tag -a <tagname> -m "<message>"
 - Delete remote tag:
   ~git push origin --delete <tagname>~
   
-- Create new branch with tag:
-  ~git checkout -b <new_branch_name> <tagname>~
