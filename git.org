@@ -60,6 +60,8 @@ you will want to use the pull command).
   (checkout) the other branch and do another git pull.
 
 ** Branches
+
+*** List branch information
 - List (local) branches in repository:
   ~git branch~
 
@@ -69,18 +71,25 @@ you will want to use the pull command).
 - List all (local and remote) branches
   ~git branch -a~
 
+*** Switching branches:
 - Switch to a branch:
   ~git checkout <branch_name>~
 
 - Checkout remote branch:
   ~git checkout --track origin/<branch_name>~
 
-- Create new branch (does not "checkout" the new branch):
+*** Creating branch:
+- Create new branch (does not "checkout" the new branch; creates branch off your current branch):
   ~git branch <branch_name>~
   
 - Create new branch AND check it out:
   ~git checkout -b <branch_name>~
+  
+- Create new branch from existing branch and check it out:
+  ~git checkout -b <new_branch> <existing_branch>~
 
+
+*** Updating branch:
 - Rename branch:
   ~git branch -m <old_branch_name> <new_branch_name>~
 
@@ -90,6 +99,7 @@ you will want to use the pull command).
 - Pushing newly created branch to remote repo:
   ~git push -u origin <branch_name>~
 
+*** Deleting branch:
 - Delete local branch
   ~git branch -d <branch_name>~
 
