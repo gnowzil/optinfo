@@ -138,8 +138,8 @@ When a tag is checked out, you will enter "DETACHED HEAD" state.  If you need to
 
 *** Show remote origin info
 #+BEGIN_SRC
-    ~git remote show origin~
-    ~git config --get remote.origin.url~
+git remote show origin
+git config --get remote.origin.url
 #+END_SRC
 
 *** Fix/update origin url:
