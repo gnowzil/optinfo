@@ -134,3 +134,14 @@ When a tag is checked out, you will enter "DETACHED HEAD" state.  If you need to
 - Delete remote tag:
   ~git push origin --delete <tagname>~
   
+** Checking Repo
+
+*** Show remote origin info
+#+BEGIN_SRC
+    ~git remote show origin~
+    ~git config --get remote.origin.url~
+#+END_SRC
+
+*** Fix/update origin url:
+    ~git remote set-url origin git@gitserver:/correct/url~
+  
