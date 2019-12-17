@@ -16,7 +16,8 @@ git status
 git log
 git log --summary            % detailed log info
 git log --online             % short one line summary
-git log --name-status        % shows files that were modified in the commit
+git log --name-status        % shows filenames that were modified in the commit
+git log --stat               % show 'diff' status on files that were changed with each commit
 #+END_SRC
 
 ** Add (stage) files for next commit:
@@ -37,28 +38,31 @@ git commit -m "<message>"
 #+END_SRC
 
 ** Push commited changes to remote repository:
-~git push~
+~git push~ is short for ~git push origin~, where ~origin~ refers to the remote repository that this project originally came from.
 
 ** Updating local repository
-Updates in a repository are 'fetched' from the remote repo and merged into
+Updates in a repository are 'fetched' from the remote repo (usually `origin`) and merged into
 your local repository.  The 'fetch' command imports updates into your local
 repo, but will *not* update the files.  The 'pull' command will fetch and
 merge the updates into the local files of your current branch. (Usually,
 you will want to use the pull command).
 
-- Fetch all of the branches from the repository:
+- Fetch all of the branches from the specified remote repository:
   ~git fetch <remote>~
+  (~git fetch~ is short for ~git fetch origin~)
 
 - Fetch specified branch only:
   ~git fetch <remote> <branch>~
 
 - Pull (fetch and merge): Fetches and merges changes into local repository
   (only updates the current branch you are using).
-  ~git pull~
+  ~git pull <remote> <branch>~
 
-  *Note* This will only merge changes into the current branch you are
-  working in.  To pull updates for other branches, you will have to switch
-  (checkout) the other branch and do another git pull.
+  *Note* The command ~git pull~ is short for ~git pull origin <current branch>~.  You must pull on every branch you want to update.
+
+** Remote repository information
+- To show remote repository information for this project,
+  ~git remote -v~
 
 ** Branches
 
