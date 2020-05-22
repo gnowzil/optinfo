@@ -118,6 +118,12 @@ created by git branch and integrate them into a single branch.
 - Merge the specified branch into the current branch
   ~git merge <branch>~
 
+*** Comparing files:
+
+- Diff a file in two different branches
+  ~git diff branch1 branch2 -- filename~
+
+
 ** Tags 
 *** List tags:
 #+BEGIN_SRC
