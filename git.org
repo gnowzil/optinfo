@@ -166,3 +166,13 @@ git config --get remote.origin.url
 *** Fix/update origin url:
     ~git remote set-url origin git@gitserver:/correct/url~
   
+
+
+** Misc
+
+*** Git Ignore
+- Per repository:  .gitignore inside a repository is automatically recognized
+- Set a global ignore file:
+  ~git config --global core.excludesfile '~/.gitignore'~
+- Show global ignore file (nothing if not set)
+  ~git config --get core.excludesfile~
