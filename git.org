@@ -111,6 +111,9 @@ you will want to use the pull command).
 - Delete remote branch
   ~git push origin --delete <branch_name>~
 
+- Update after deleting remote branch
+  ~git fetch --all --prune~
+
 *** Merging branches:
 The git merge command lets you take the independent lines of development
 created by git branch and integrate them into a single branch.
@@ -167,12 +170,13 @@ git config --get remote.origin.url
     ~git remote set-url origin git@gitserver:/correct/url~
   
 
-
 ** Misc
 
 *** Git Ignore
 - Per repository:  .gitignore inside a repository is automatically recognized
+
 - Set a global ignore file:
-  ~git config --global core.excludesfile '~/.gitignore'~
+  ~git config --global core.excludesfile '/path/to/.gitignore'~
+
 - Show global ignore file (nothing if not set)
   ~git config --get core.excludesfile~
