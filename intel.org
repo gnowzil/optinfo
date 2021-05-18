@@ -1,6 +1,11 @@
 * Using Intel MKL
 
-** Installation
+** oneAPI Intel
+
+Download the Fortran Compiler and Math Kernel Library from this page:
+https://software.intel.com/content/www/us/en/develop/articles/oneapi-standalone-components.html#fortran
+
+** OLD Installation info
 
 Installing Intel libs via apt-get (Linux/Ubuntu):
 https://software.intel.com/en-us/articles/installing-intel-free-libs-and-python-apt-repo
